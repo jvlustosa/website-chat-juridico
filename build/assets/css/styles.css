@@ -1,8 +1,10 @@
 /* ---------- Container for the orbiting circles animation ---------- */
 #circle-orbit-container {
     position: relative;
-    height: 80vh;
-    width: 80vh;
+    height: min(80vh, 80vw);
+    width: min(80vh, 80vw);
+    margin: 0 auto;
+    /* Center the container */
 }
 
 /* ---------- Inner orbit - This is the circles closest to the central point ---------- */
@@ -55,7 +57,7 @@
 }
 
 .inner-orbit-cirlces::before {
-    font-size: 3.5em;
+    font-size: min(3.5em, 5vw);
 }
 
 /* ---------- Middle orbit - This is the circles second closest to the central point ---------- */
@@ -108,7 +110,7 @@
 }
 
 .middle-orbit-cirlces::before {
-    font-size: 3.5em;
+    font-size: min(3.5em, 5vw);
 }
 
 /* ---------- Outer orbit - This is the circles furthest away from the central point ---------- */
@@ -139,46 +141,62 @@
 
 /* Outer orbit circles - Legal themed */
 .outer-orbit-cirlces:nth-child(1)::before {
-    content: '👨‍💼'; /* Lawyer */
+    content: '👨‍💼';
+    /* Lawyer */
 }
+
 .outer-orbit-cirlces:nth-child(2) {
     transform: rotate(60deg);
 }
+
 .outer-orbit-cirlces:nth-child(2)::before {
-    content: '📜'; /* Legal document */
+    content: '📜';
+    /* Legal document */
     transform: translate(-50%, -50%) rotate(-60deg);
 }
+
 .outer-orbit-cirlces:nth-child(3) {
     transform: rotate(120deg);
 }
+
 .outer-orbit-cirlces:nth-child(3)::before {
-    content: '🏛️'; /* Courthouse */
+    content: '🏛️';
+    /* Courthouse */
     transform: translate(-50%, -50%) rotate(-120deg);
 }
+
 .outer-orbit-cirlces:nth-child(4) {
     transform: rotate(180deg);
 }
+
 .outer-orbit-cirlces:nth-child(4)::before {
-    content: '✍️'; /* Writing hand */
+    content: '✍️';
+    /* Writing hand */
     transform: translate(-50%, -50%) rotate(-180deg);
 }
+
 .outer-orbit-cirlces:nth-child(5) {
     transform: rotate(240deg);
 }
+
 .outer-orbit-cirlces:nth-child(5)::before {
-    content: '📋'; /* Clipboard */
+    content: '📋';
+    /* Clipboard */
     transform: translate(-50%, -50%) rotate(-240deg);
 }
+
 .outer-orbit-cirlces:nth-child(6) {
     transform: rotate(300deg);
 }
+
 .outer-orbit-cirlces:nth-child(6)::before {
-    content: '⚡'; /* Quick action */
+    content: '⚡';
+    /* Quick action */
     transform: translate(-50%, -50%) rotate(-300deg);
 }
 
 .outer-orbit-cirlces::before {
-    font-size: 3.5em;
+    font-size: min(3.5em, 5vw);
 }
 
 /* ---------- Animation ---------- */
