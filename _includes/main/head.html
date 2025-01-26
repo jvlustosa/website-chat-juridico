@@ -1,0 +1,101 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="keywords"
+    content="{{ page.keywords | default: 'chat jurídico, atendimento jurídico online, automação jurídica, chatbot advocacia, whatsapp jurídico, multicanal jurídico, atendimento automatizado, consultoria jurídica digital, legal tech' }}">
+  <meta name="author" content="Chat Juridico">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="{{ page.title | default: 'Chat Juridico - Plataforma de Atendimento Jurídico'}}">
+  <meta property="og:description"
+    content="{{ page.description | default: 'Automatize o atendimento do seu escritório com nossa plataforma integrada ao WhatsApp' }}">
+  <meta property="og:image" content="{{ site.url }}{{ page.image_url | default: '/assets/images/banner-cj.jpg' }}">
+  <meta property="og:url" content="{{ page.permalink | default: 'https://chatjuridico.com.br/'}}">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default: 'Chat Juridico - Plataforma de Atendimento Jurídico'}}">
+  <meta name="twitter:description"
+    content="{{ page.description | default: 'Automatize o atendimento do seu escritório com nossa plataforma integrada ao WhatsApp' }}">
+  <meta name="twitter:image"
+    content="{{ site.url }}{{ page.image_url | default: '/assets/vectors/logo-chat-juridico.png' }}">
+
+  <title>ChatJuridico - Plataforma de Multitendimento Jurídico</title>
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="icon" type="image/x-icon" href="/assets/vectors/chat-juridico-square-logo.png" />
+
+  <style>
+    body {
+      color: #363636;
+    }
+
+    .bg-primary {
+      background-color: #3A5D9D !important;
+    }
+
+    .card {
+      color: #363636;
+    }
+
+    .text-center {
+      color: #363636;
+    }
+
+    /* New heading styles */
+    h1.display-4 {
+      font-size: 2.8rem;
+      /* Reduced from default 3.5rem */
+    }
+
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      h1.display-4 {
+        font-size: 2.3rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #6B8FD4, #A5C0FF, #6B8FD4);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: gradient 3s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+  </style>
+</head>

@@ -1,0 +1,64 @@
+body {
+    color: #363636;
+}
+
+.bg-primary {
+    background-color: #3A5D9D !important;
+}
+
+.card {
+    color: #363636;
+}
+
+.text-center {
+    color: #363636;
+}
+
+/* New heading styles */
+h1.display-4 {
+    font-size: 2.8rem;
+    /* Reduced from default 3.5rem */
+}
+
+h2 {
+    font-size: 2.2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    h1.display-4 {
+        font-size: 2.3rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #6B8FD4, #A5C0FF, #6B8FD4);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient 3s linear infinite;
+    display: inline-block;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}

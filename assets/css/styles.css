@@ -1,0 +1,193 @@
+/* ---------- Container for the orbiting circles animation ---------- */
+#circle-orbit-container {
+    position: relative;
+    height: 80vh;
+    width: 80vh;
+}
+
+/* ---------- Inner orbit - This is the circles closest to the central point ---------- */
+#inner-orbit {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    border: 2px rgba(74, 67, 127, 0.3) dashed;
+    border-radius: 100%;
+    -webkit-animation: spin-right 10s linear infinite;
+    animation: spin-right 10s linear infinite;
+    opacity: 1;
+}
+
+/* ---------- Repeating styles for the inner orbiting circles ---------- */
+.inner-orbit-cirlces {
+    position: absolute;
+    top: 40%;
+    left: -5%;
+    height: 8%;
+    width: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Inner orbit circles - Chat themed */
+.inner-orbit-cirlces:nth-child(1)::before {
+    content: '💭';
+}
+
+.inner-orbit-cirlces:nth-child(2) {
+    transform: rotate(120deg);
+}
+
+.inner-orbit-cirlces:nth-child(2)::before {
+    content: '⚡';
+    transform: translate(-50%, -50%) rotate(-120deg);
+}
+
+.inner-orbit-cirlces:nth-child(3) {
+    transform: rotate(240deg);
+}
+
+.inner-orbit-cirlces:nth-child(3)::before {
+    content: '🤝';
+    transform: translate(-50%, -50%) rotate(-240deg);
+}
+
+.inner-orbit-cirlces::before {
+    font-size: 3.5em;
+}
+
+/* ---------- Middle orbit - This is the circles second closest to the central point ---------- */
+#middle-orbit {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    border: 2px rgba(74, 67, 127, 0.3) dashed;
+    border-radius: 100%;
+    -webkit-animation: spin-right 15s linear infinite;
+    animation: spin-right 15s linear infinite;
+    opacity: 1;
+}
+
+/* ---------- Repeating styles for the middle orbiting circles ---------- */
+.middle-orbit-cirlces {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    height: 10%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Middle orbit circles - Justice themed */
+.middle-orbit-cirlces:nth-child(1)::before {
+    content: '⚖️';
+}
+
+.middle-orbit-cirlces:nth-child(2) {
+    transform: rotate(120deg);
+}
+
+.middle-orbit-cirlces:nth-child(2)::before {
+    content: '👨‍⚖️';
+    transform: translate(-50%, -50%) rotate(-120deg);
+}
+
+.middle-orbit-cirlces:nth-child(3) {
+    transform: rotate(240deg);
+}
+
+.middle-orbit-cirlces:nth-child(3)::before {
+    content: '🏛️';
+    transform: translate(-50%, -50%) rotate(-240deg);
+}
+
+.middle-orbit-cirlces::before {
+    font-size: 3.5em;
+}
+
+/* ---------- Outer orbit - This is the circles furthest away from the central point ---------- */
+#outer-orbit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px rgba(74, 67, 127, 0.3) dashed;
+    border-radius: 100%;
+    -webkit-animation: spin-right 20s linear infinite;
+    animation: spin-right 20s linear infinite;
+    opacity: 1;
+}
+
+/* ---------- Repeating styles for the outer orbiting circles ---------- */
+.outer-orbit-cirlces {
+    position: absolute;
+    top: -6%;
+    left: 42%;
+    height: 12%;
+    width: 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Outer orbit circles - Legal themed */
+.outer-orbit-cirlces:nth-child(1)::before {
+    content: '👨‍💼'; /* Lawyer */
+}
+.outer-orbit-cirlces:nth-child(2) {
+    transform: rotate(60deg);
+}
+.outer-orbit-cirlces:nth-child(2)::before {
+    content: '📜'; /* Legal document */
+    transform: translate(-50%, -50%) rotate(-60deg);
+}
+.outer-orbit-cirlces:nth-child(3) {
+    transform: rotate(120deg);
+}
+.outer-orbit-cirlces:nth-child(3)::before {
+    content: '🏛️'; /* Courthouse */
+    transform: translate(-50%, -50%) rotate(-120deg);
+}
+.outer-orbit-cirlces:nth-child(4) {
+    transform: rotate(180deg);
+}
+.outer-orbit-cirlces:nth-child(4)::before {
+    content: '✍️'; /* Writing hand */
+    transform: translate(-50%, -50%) rotate(-180deg);
+}
+.outer-orbit-cirlces:nth-child(5) {
+    transform: rotate(240deg);
+}
+.outer-orbit-cirlces:nth-child(5)::before {
+    content: '📋'; /* Clipboard */
+    transform: translate(-50%, -50%) rotate(-240deg);
+}
+.outer-orbit-cirlces:nth-child(6) {
+    transform: rotate(300deg);
+}
+.outer-orbit-cirlces:nth-child(6)::before {
+    content: '⚡'; /* Quick action */
+    transform: translate(-50%, -50%) rotate(-300deg);
+}
+
+.outer-orbit-cirlces::before {
+    font-size: 3.5em;
+}
+
+/* ---------- Animation ---------- */
+@-webkit-keyframes spin-right {
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
