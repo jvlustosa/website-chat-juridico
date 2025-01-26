@@ -209,3 +209,10 @@
         transform: rotate(360deg);
     }
 }
+
+/* Hide animation on mobile devices */
+@media screen and (max-width: 768px) {
+    #circle-orbit-container {
+        display: none;
+    }
+}
