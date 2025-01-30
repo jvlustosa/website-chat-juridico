@@ -195,6 +195,19 @@
     transform: translate(-50%, -50%) rotate(-300deg);
 }
 
+.outer-orbit-cirlces:nth-child(7) {
+    transform: rotate(360deg);
+}
+
+.outer-orbit-cirlces:nth-child(7)::before {
+    content: '\f232';
+    /* WhatsApp Font Awesome unicode */
+    font-family: 'Font Awesome 6 Brands';
+    color: #25D366;
+    /* WhatsApp brand color */
+    transform: translate(-50%, -50%) rotate(-360deg);
+}
+
 .outer-orbit-cirlces::before {
     font-size: min(3.5em, 5vw);
 }
