@@ -1,30 +1,29 @@
-
-- name: Adriana Junqueira
-  position: CEO, Brechó de Luxo
+- name: Dr. Ricardo Mendes
+  position: Sócio, Mendes & Associados Advocacia
   image: 
-  text: "EMPRESA INCRÍVEL! Detalhamento e profissionalismo do início ao fim. Recomendamos 100%."
+  text: "O ChatJurídico revolucionou nosso atendimento inicial aos clientes. Reduziu em 70% o tempo gasto com triagem de casos e melhorou significativamente nossa produtividade."
   stars: 5
 
-- name: Maurício Santos
-  position: CEO, Cálculo Jurídico
-  image: mauricio.webp
-  text: "Resultados impressionantes desde o primeiro dia. Recomendo fortemente!"
-  stars: 5
-
-- name: Danilo
-  position: CEO, Districenter
-  image: Danilo.png
-  text: "A qualidade do serviço prestado é muito boa. Atenção com os detalhes, entrega dentro do prazo. Gostei do serviço do Vitor."
-  stars: 5
-
-- name: Carmen
-  position: Contadora e BPO
-  image: Carmen.png
-  text: "Ferramenta excelente e de fácil uso"
-  stars: 5
-
-- name: Marcelo Oliveira
-  position: "@thelivebox12"
+- name: Dra. Patricia Almeida
+  position: Coordenadora Jurídica, Almeida & Santos
   image: 
-  text: "Fui super bem atendido, desde o primeiro contato o Vitor foi solicito e atencioso. O material que ele me entregou foi muito profissional, pude ter um cenário dos próximos 5 anos que dificilmente eu teria, super recomendo!"
+  text: "Excelente ferramenta para automatizar consultas jurídicas básicas. Nossos advogados agora podem focar em questões mais complexas enquanto o ChatJurídico cuida do atendimento inicial."
+  stars: 5
+
+- name: Dr. Fernando Costa
+  position: Diretor Jurídico, Costa Advogados
+  image: 
+  text: "Implementamos o ChatJurídico há 6 meses e os resultados são surpreendentes. Conseguimos ampliar nossa capacidade de atendimento em 200% sem aumentar nossa equipe."
+  stars: 5
+
+- name: Dra. Luciana Martins
+  position: Sócia, LM Advocacia Empresarial
+  image: 
+  text: "O suporte técnico é excepcional e a ferramenta é extremamente intuitiva. Nossos clientes elogiam a rapidez no atendimento, mesmo fora do horário comercial."
+  stars: 5
+
+- name: Dr. Gabriel Santos
+  position: Coordenador, Santos & Partners
+  image: 
+  text: "A precisão das respostas e a capacidade de lidar com diferentes áreas do direito nos impressionou. O ChatJurídico se tornou uma ferramenta indispensável para nosso escritório."
   stars: 5
