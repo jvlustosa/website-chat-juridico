@@ -1,0 +1,58 @@
+<script>
+    // Helper function to get cookie value
+    function getCookieValue(cookieName) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${cookieName}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Get fbp value from cookies
+    const fbp = getCookieValue('_fbp');
+
+    // Get fbclid from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const fbclid = urlParams.get('fbclid');
+
+    // Construct fbc value (consider storing fbclid timestamp for accuracy)
+    const fbc = fbclid ? `fb.1.${Math.floor(Date.now() / 1000)}.${fbclid}` : null;
+
+    // Function to append FB parameters to URLs
+    function appendFBParamsToURL(url) {
+        try {
+            const urlObj = new URL(url);
+            if (fbp) urlObj.searchParams.set('fbp', fbp);
+            if (fbc) urlObj.searchParams.set('fbc', fbc);
+            return urlObj.toString();
+        } catch (error) {
+            console.error('Invalid URL:', url, error);
+            return url; // Return the original URL if an error occurs
+        }
+    }
+
+    // Function to check if a URL is external
+    function isExternalURL(url) {
+        try {
+            const currentDomain = window.location.hostname;
+            const urlDomain = new URL(url).hostname;
+            return currentDomain !== urlDomain;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Add click event listener to links and buttons
+    document.addEventListener('click', function (event) {
+        const target = event.target.closest('a, button[data-href]');
+        if (!target) return;
+
+        const href = target.href || target.dataset.href;
+        if (href && isExternalURL(href)) {
+            event.preventDefault();
+            const modifiedURL = appendFBParamsToURL(href);
+            window.location.href = modifiedURL;
+        }
+    });
+
+    // Log the captured values for testing
+    console.log('Facebook Pixel Data:', { fbp, fbc });
+</script>

@@ -1,0 +1,36 @@
+<div class="card-body p-4 pro-card">
+  <div class="mb-1">
+    <img class="icon-card mr-3" src="/assets/vectors/plano-icon.svg" style="width: 50px;" />
+    <h4 class="main-headline">VALUATION EXPRESS</h4>
+    <p>Laudo de Valuation com análise essencial, ideal para empresas que faturam até <span class="green-primary">R$ 100
+        mil</span> por mês</p>
+    <h2 class="card-price" style="color: #80AA6D;">R$ 497</h2>
+    <p style="color: #6c757d;">Pagamento único</p>
+    <a href="{{include.button_url}}?utm_source={{include.utm_source | default: 'pricing'}}"
+      class="btn btn-block btn-orange" style="font-size: 1.1rem;">{{include.button_text}} <i class="fas fa-arrow-right"></i> </a>
+  </div>
+  {% unless page.hide_demo %}
+  <p style="color: #9c9ea0;" class="demo-description mt-2 d-flex align-items-center">
+    <img src="/assets/vectors/icons/no-credit-card 1.svg" alt="Ícone de cartão" class="me-2" />
+    Demonstração sem compromisso
+  </p>
+  {% endunless %}
+  <div class="row mt-4" style="background-color: #F0FFEA">
+    <ul class="fa-ul mt-2" style="width: auto;">
+      <li><span class="fa-li"><i class="fas fa-check"></i></span>Relatório de
+        Valuation em PDF</li>
+      <li><span class="fa-li"><i class="fas fa-check"></i></span>Resultado em até
+        30 minutos</li>
+      <li><span class="fa-li"><i class="fas fa-check"></i></span>Insira os dados financeiros da sua empresa
+        você mesmo</li>
+      <li><span class="fa-li"><i class="fas fa-check"></i></span>Suporte de um
+        especialista de Valuation por whatsapp em qualquer etapa</li>
+      <li><span class="fa-li"><i class="fas fa-check"></i></span>Inicie quando
+        quiser</li>
+    </ul>
+  </div>
+  <div class="text-center mt-4">
+    <a href="{{site.data.contato.whatsapp}}?text=Gostaria%20de%20saber%20mais%20sobre%20oa%20Laudo%20de%20Valuation%20com%20espcialista"
+      style="color: #2c6017;"><i class="fab fa-whatsapp"></i> Com dúvidas? Fale conosco </a>
+  </div>
+</div>

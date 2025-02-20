@@ -1,0 +1,27 @@
+.shining-border {
+    position: relative;
+    display: inline-block;
+}
+
+.shining-border::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0));
+    background-size: 200% 100%;
+    animation: borderShine 3s linear infinite;
+}
+
+@keyframes borderShine {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

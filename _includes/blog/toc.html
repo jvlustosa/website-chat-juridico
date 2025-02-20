@@ -1,0 +1,39 @@
+<ol id="toc"></ol>
+<hr>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const contentArea = document.getElementById('post-content');
+        const toc = document.getElementById('toc');
+        const headers = contentArea.querySelectorAll('h2, h3, h4');
+
+        headers.forEach((header) => {
+            // Generate a URL-encoded ID based on the header text
+            const anchor = encodeURIComponent(header.innerText.toLowerCase().replace(/\s+/g, '-'));
+            header.id = anchor;
+
+            const tocEntry = document.createElement('li');
+            const tocLink = document.createElement('a');
+            tocLink.href = `#${anchor}`;
+            tocLink.innerText = header.innerText;
+            tocEntry.appendChild(tocLink);
+
+            toc.appendChild(tocEntry);
+        });
+    });
+</script>
+<style>
+    #toc a {
+        color: #80AA6D;
+    }
+    #toc a:hover {
+        color: #628950;
+    }
+    #toc a:link {
+        text-decoration: none;
+
+    }
+
+    #toc li {
+        margin-top: 5px;
+    }
+</style>
