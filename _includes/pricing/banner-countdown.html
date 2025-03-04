@@ -1,0 +1,72 @@
+<!-- Sticky Countdown Banner -->
+<div class="countdown-banner sticky-top py-2"
+    style="background-color: #DC3545; border-bottom: 1px solid #B02A37; z-index: 1030;">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center position-relative">
+            <div class="invisible">
+                <a href="#pricing" class="btn btn-light btn-sm">Aproveitar oferta <i
+                        class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+            <div
+                class="d-flex justify-content-center align-items-center gap-2 position-absolute start-50 translate-middle-x">
+                <i class="bi bi-clock-history text-white"></i>
+                <span class="fw-semibold text-white">Oferta especial termina em:</span>
+                <div class="d-flex gap-2 countdown-timer">
+                    <div class="time-block">
+                        <span id="hours" class="fw-bold">24</span>h
+                    </div>
+                    <div class="time-block">
+                        <span id="minutes" class="fw-bold">00</span>m
+                    </div>
+                    <div class="time-block">
+                        <span id="seconds" class="fw-bold">00</span>s
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="#pricing" class="btn btn-light btn-sm">Aproveitar oferta <i
+                        class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* Countdown Banner Styles */
+    .countdown-banner {
+        font-size: 0.9rem;
+    }
+
+    .countdown-timer .time-block {
+        background-color: #FFF;
+        padding: 2px 6px;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        color: #DC3545;
+        font-weight: 500;
+    }
+</style>
+
+<script>
+    // Countdown Timer Script
+    function updateCountdown() {
+        const now = new Date();
+        const tomorrow = new Date();
+        tomorrow.setHours(23, 59, 59);
+
+        const diff = tomorrow - now;
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call
+</script>
