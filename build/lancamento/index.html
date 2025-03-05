@@ -173,7 +173,8 @@
     <!-- Logo Section -->
     <div class="container mb-4">
         <div class="text-center">
-            <img src="/assets/vectors/logo-chat-juridico-white.svg" alt="Chat Jurídico Logo" class="logo-img">
+            <img src="/assets/vectors/logo-chat-juridico-white.svg" alt="Chat Jurídico Logo" class="logo-img"
+                loading="lazy" width="360" height="auto">
         </div>
 
     </div>
@@ -207,7 +208,7 @@
                 <div class="laptop-container position-relative"
                     style="filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); border-radius: 8px; width: 100%;">
                     <img src="/assets/images/latptop-chat-juridico-kanban.png" alt="Chat Jurídico Software"
-                        class="img-fluid" style="max-width: 100%;">
+                        class="img-fluid laptop-animation" style="max-width: 100%;">
 
                     <!-- Imagens flutuantes -->
                     <img src="/assets/vectors/whatsapp.png" alt="WhatsApp Icon" class="floating-icon floating-1"
@@ -1306,6 +1307,33 @@
         .logo-img {
             max-width: 180px;
         }
+    }
+
+    /* Laptop fade in animation */
+    .laptop-animation {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 0.5s;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Ensure smooth animation on all browsers */
+    .laptop-animation {
+        will-change: transform, opacity;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 </style>
 
