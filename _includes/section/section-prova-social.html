@@ -265,34 +265,10 @@
             font-size: 1rem;
         }
 
+        /* Remove fading effect on mobile */
         .slider-container::before,
         .slider-container::after {
             display: none;
-            /* Remove fade effect on mobile */
-        }
-
-        .slide-track {
-            animation: none;
-            /* Remove sliding animation on mobile */
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 1rem;
-        }
-
-        .testimonial-card {
-            flex: none;
-            width: 100%;
-            margin: 0 0 1rem 0;
-        }
-
-        .slider {
-            overflow-y: visible;
-            overflow-x: hidden;
-        }
-
-        .slider-container {
-            overflow: visible;
         }
     }
 </style>

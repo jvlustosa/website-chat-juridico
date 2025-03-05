@@ -235,18 +235,7 @@ title: Chat Jurídico - Lançamento
                         <div class="mt-4 text-center">
 
                             <!-- Testimonial Rotation -->
-                            <div class="text-center mt-4 testimonial-rotation">
-                                <div class="mb-2">
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                </div>
-                                <p class="text-muted small mb-1 testimonial-text"></p>
-                                <p class="small fw-bold mb-0 testimonial-author"></p>
-                                <p class="text-muted smaller mb-0 testimonial-position"></p>
-                            </div>
+                            {% include pricing/testimonial-rotation.html %}
                         </div>
                     </div>
                 </div>
@@ -470,14 +459,8 @@ title: Chat Jurídico - Lançamento
             </div>
         </div>
     </div>
-</section>
 
-<!-- Testimonial Rotation -->
-<div class="text-center mt-4 testimonial-rotation">
-    <p class="text-muted small mb-1 testimonial-text"></p>
-    <p class="small fw-bold mb-0 testimonial-author"></p>
-    <p class="text-muted smaller mb-0 testimonial-position"></p>
-</div>
+</section>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -635,6 +618,15 @@ title: Chat Jurídico - Lançamento
             height: 30px !important;
             min-width: 30px !important;
         }
+
+        /* Reduce pricing card padding on mobile */
+        .pricing-section .card-body {
+            padding: 2rem !important;
+        }
+
+        .pricing-section .list-unstyled li {
+            margin-bottom: 1rem !important;
+        }
     }
 
     .logo-img {
@@ -736,72 +728,5 @@ title: Chat Jurídico - Lançamento
                 behavior: 'smooth'
             });
         });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const testimonials = [
-            {% for testimonial in site.data.testimonial %}
-            {
-            text: "{{ testimonial.text }}",
-            name: "{{ testimonial.name }}",
-            position: "{{ testimonial.position }}"
-        },
-        {% endfor %}
-        ];
-
-    // Only run rotation on desktop
-    if (window.innerWidth > 768) {
-        const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
-        const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
-        const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
-        let currentIndex = 0;
-
-        function updateTestimonial() {
-            testimonialText.style.opacity = 0;
-            testimonialAuthor.style.opacity = 0;
-            testimonialPosition.style.opacity = 0;
-
-            setTimeout(() => {
-                testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
-                testimonialAuthor.textContent = testimonials[currentIndex].name;
-                testimonialPosition.textContent = testimonials[currentIndex].position;
-
-                testimonialText.style.opacity = 1;
-                testimonialAuthor.style.opacity = 1;
-                testimonialPosition.style.opacity = 1;
-
-                currentIndex = (currentIndex + 1) % testimonials.length;
-            }, 500);
-        }
-
-        updateTestimonial();
-        setInterval(updateTestimonial, 10000);
-    } else {
-        // For mobile, show all testimonials stacked
-        const testimonialContainer = document.querySelector('.testimonial-rotation');
-        testimonialContainer.innerHTML = ''; // Clear rotation container
-
-        testimonials.forEach(testimonial => {
-            const testimonialElement = document.createElement('div');
-            testimonialElement.className = 'testimonial-item mb-4';
-            testimonialElement.innerHTML = `
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="mb-2">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </div>
-                            <p class="mb-2">"${testimonial.text}"</p>
-                            <strong class="d-block">${testimonial.name}</strong>
-                            <small class="text-muted">${testimonial.position}</small>
-                        </div>
-                    </div>
-                `;
-            testimonialContainer.appendChild(testimonialElement);
-        });
-    }
     });
 </script>

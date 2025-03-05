@@ -651,34 +651,10 @@
             font-size: 1rem;
         }
 
+        /* Remove fading effect on mobile */
         .slider-container::before,
         .slider-container::after {
             display: none;
-            /* Remove fade effect on mobile */
-        }
-
-        .slide-track {
-            animation: none;
-            /* Remove sliding animation on mobile */
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 1rem;
-        }
-
-        .testimonial-card {
-            flex: none;
-            width: 100%;
-            margin: 0 0 1rem 0;
-        }
-
-        .slider {
-            overflow-y: visible;
-            overflow-x: hidden;
-        }
-
-        .slider-container {
-            overflow: visible;
         }
     }
 </style>
@@ -809,17 +785,109 @@
 
                             <!-- Testimonial Rotation -->
                             <div class="text-center mt-4 testimonial-rotation">
-                                <div class="mb-2">
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                </div>
-                                <p class="text-muted small mb-1 testimonial-text"></p>
-                                <p class="small fw-bold mb-0 testimonial-author"></p>
-                                <p class="text-muted smaller mb-0 testimonial-position"></p>
-                            </div>
+    <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 120px;">
+        <div class="mb-2">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+        </div>
+        <p class="text-muted small mb-1 testimonial-text"></p>
+        <p class="small fw-bold mb-0 testimonial-author"></p>
+        <p class="text-muted smaller mb-0 testimonial-position"></p>
+    </div>
+</div>
+
+<style>
+    .testimonial-rotation {
+        min-height: 120px;
+    }
+
+    .testimonial-rotation .testimonial-text,
+    .testimonial-rotation .testimonial-author,
+    .testimonial-rotation .testimonial-position {
+        transition: opacity 0.5s ease-in-out;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Only run on desktop
+        if (window.innerWidth > 768) {
+            const testimonials = [
+                
+        {
+            text: "O ChatJurídico revolucionou nosso atendimento inicial aos clientes. Reduziu em 70% o tempo gasto com triagem de casos e melhorou significativamente nossa produtividade.",
+                name: "Dr. Ricardo Mendes",
+                    position: "Sócio, Mendes & Associados Advocacia"
+        },
+        
+        {
+            text: "Excelente ferramenta para automatizar consultas jurídicas básicas. Nossos advogados agora podem focar em questões mais complexas enquanto o ChatJurídico cuida do atendimento inicial.",
+                name: "Dra. Patricia Almeida",
+                    position: "Coordenadora Jurídica, Almeida & Santos"
+        },
+        
+        {
+            text: "Implementamos o ChatJurídico há 6 meses e os resultados são surpreendentes. Conseguimos ampliar nossa capacidade de atendimento em 200% sem aumentar nossa equipe.",
+                name: "Dr. Fernando Costa",
+                    position: "Diretor Jurídico, Costa Advogados"
+        },
+        
+        {
+            text: "O suporte técnico é excepcional e a ferramenta é extremamente intuitiva. Nossos clientes elogiam a rapidez no atendimento, mesmo fora do horário comercial.",
+                name: "Dra. Luciana Martins",
+                    position: "Sócia, LM Advocacia Empresarial"
+        },
+        
+        {
+            text: "A precisão das respostas e a capacidade de lidar com diferentes áreas do direito nos impressionou. O ChatJurídico se tornou uma ferramenta indispensável para nosso escritório.",
+                name: "Dr. Gabriel Santos",
+                    position: "Coordenador, Santos & Partners"
+        },
+        
+            ];
+
+        const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
+        const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
+        const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
+        let currentIndex = 0;
+
+        function updateTestimonial() {
+            // Fade out
+            testimonialText.style.opacity = 0;
+            testimonialAuthor.style.opacity = 0;
+            testimonialPosition.style.opacity = 0;
+
+            setTimeout(() => {
+                // Update content
+                testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
+                testimonialAuthor.textContent = testimonials[currentIndex].name;
+                testimonialPosition.textContent = testimonials[currentIndex].position;
+
+                // Fade in
+                testimonialText.style.opacity = 1;
+                testimonialAuthor.style.opacity = 1;
+                testimonialPosition.style.opacity = 1;
+
+                // Update index
+                currentIndex = (currentIndex + 1) % testimonials.length;
+            }, 500);
+        }
+
+        // Initial load
+        updateTestimonial();
+
+        // Update every 10 seconds
+        setInterval(updateTestimonial, 10000);
+    }
+    });
+</script>
                         </div>
                     </div>
                 </div>
@@ -1191,14 +1259,8 @@
             </div>
         </div>
     </div>
-</section>
 
-<!-- Testimonial Rotation -->
-<div class="text-center mt-4 testimonial-rotation">
-    <p class="text-muted small mb-1 testimonial-text"></p>
-    <p class="small fw-bold mb-0 testimonial-author"></p>
-    <p class="text-muted smaller mb-0 testimonial-position"></p>
-</div>
+</section>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -1356,6 +1418,15 @@
             height: 30px !important;
             min-width: 30px !important;
         }
+
+        /* Reduce pricing card padding on mobile */
+        .pricing-section .card-body {
+            padding: 2rem !important;
+        }
+
+        .pricing-section .list-unstyled li {
+            margin-bottom: 1rem !important;
+        }
     }
 
     .logo-img {
@@ -1457,97 +1528,6 @@
                 behavior: 'smooth'
             });
         });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const testimonials = [
-            
-            {
-            text: "O ChatJurídico revolucionou nosso atendimento inicial aos clientes. Reduziu em 70% o tempo gasto com triagem de casos e melhorou significativamente nossa produtividade.",
-            name: "Dr. Ricardo Mendes",
-            position: "Sócio, Mendes & Associados Advocacia"
-        },
-        
-            {
-            text: "Excelente ferramenta para automatizar consultas jurídicas básicas. Nossos advogados agora podem focar em questões mais complexas enquanto o ChatJurídico cuida do atendimento inicial.",
-            name: "Dra. Patricia Almeida",
-            position: "Coordenadora Jurídica, Almeida & Santos"
-        },
-        
-            {
-            text: "Implementamos o ChatJurídico há 6 meses e os resultados são surpreendentes. Conseguimos ampliar nossa capacidade de atendimento em 200% sem aumentar nossa equipe.",
-            name: "Dr. Fernando Costa",
-            position: "Diretor Jurídico, Costa Advogados"
-        },
-        
-            {
-            text: "O suporte técnico é excepcional e a ferramenta é extremamente intuitiva. Nossos clientes elogiam a rapidez no atendimento, mesmo fora do horário comercial.",
-            name: "Dra. Luciana Martins",
-            position: "Sócia, LM Advocacia Empresarial"
-        },
-        
-            {
-            text: "A precisão das respostas e a capacidade de lidar com diferentes áreas do direito nos impressionou. O ChatJurídico se tornou uma ferramenta indispensável para nosso escritório.",
-            name: "Dr. Gabriel Santos",
-            position: "Coordenador, Santos & Partners"
-        },
-        
-        ];
-
-    // Only run rotation on desktop
-    if (window.innerWidth > 768) {
-        const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
-        const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
-        const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
-        let currentIndex = 0;
-
-        function updateTestimonial() {
-            testimonialText.style.opacity = 0;
-            testimonialAuthor.style.opacity = 0;
-            testimonialPosition.style.opacity = 0;
-
-            setTimeout(() => {
-                testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
-                testimonialAuthor.textContent = testimonials[currentIndex].name;
-                testimonialPosition.textContent = testimonials[currentIndex].position;
-
-                testimonialText.style.opacity = 1;
-                testimonialAuthor.style.opacity = 1;
-                testimonialPosition.style.opacity = 1;
-
-                currentIndex = (currentIndex + 1) % testimonials.length;
-            }, 500);
-        }
-
-        updateTestimonial();
-        setInterval(updateTestimonial, 10000);
-    } else {
-        // For mobile, show all testimonials stacked
-        const testimonialContainer = document.querySelector('.testimonial-rotation');
-        testimonialContainer.innerHTML = ''; // Clear rotation container
-
-        testimonials.forEach(testimonial => {
-            const testimonialElement = document.createElement('div');
-            testimonialElement.className = 'testimonial-item mb-4';
-            testimonialElement.innerHTML = `
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="mb-2">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                            </div>
-                            <p class="mb-2">"${testimonial.text}"</p>
-                            <strong class="d-block">${testimonial.name}</strong>
-                            <small class="text-muted">${testimonial.position}</small>
-                        </div>
-                    </div>
-                `;
-            testimonialContainer.appendChild(testimonialElement);
-        });
-    }
     });
 </script>
 
