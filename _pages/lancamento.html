@@ -158,7 +158,8 @@ title: Chat Jurídico - Lançamento
                                     <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
                                     <div>
                                         <h6 class="mb-1 fw-bold">CRM de Chats</h6>
-                                        <p class="text-muted mb-0 small">Organize todas as conversas em um só lugar</p>
+                                        <p class="text-muted mb-0 small">Organize todas as conversas em um só lugar.
+                                            Toda a equipe atendendo simultaneamente.</p>
                                     </div>
                                 </div>
                             </li>
@@ -199,16 +200,6 @@ title: Chat Jurídico - Lançamento
                                     <div>
                                         <h6 class="mb-1 fw-bold">Scripts de Atendimento</h6>
                                         <p class="text-muted mb-0 small">Padronize suas respostas</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="mb-4">
-                                <div class="d-flex">
-                                    <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
-                                    <div>
-                                        <h6 class="mb-1 fw-bold">Multiatendimento</h6>
-                                        <p class="text-muted mb-0 small">Toda equipe atendendo simultaneamente</p>
                                     </div>
                                 </div>
                             </li>
@@ -410,7 +401,9 @@ title: Chat Jurídico - Lançamento
     <!-- Add CTA Button -->
     <div class="text-center mt-5">
         <a href="#pricing" class="btn btn-primary btn-lg scroll-to-pricing">
-            Aproveitar oferta especial de lançamento <i class="bi bi-arrow-right ms-2"></i>
+            <span class="d-none d-md-inline">Aproveitar oferta especial de lançamento</span>
+            <span class="d-md-none">Aproveitar oferta</span>
+            <i class="bi bi-arrow-right ms-2"></i>
         </a>
     </div>
 </section>
@@ -592,6 +585,13 @@ title: Chat Jurídico - Lançamento
 
     .testimonial-rotation .smaller {
         font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+        .btn-lg {
+            padding: 0.75rem 1.25rem;
+            font-size: 1rem;
+        }
     }
 </style>
 
