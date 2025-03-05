@@ -2,7 +2,7 @@
 <div class="alert alert-warning alert-dismissible fade show mb-0 text-center py-3" role="alert">
     <div class="container">
         <div class="row align-items-center justify-content-center">
-            <!-- Timer e texto para desktop -->
+            <!-- Desktop View -->
             <div class="d-none d-md-flex align-items-center justify-content-center w-100">
                 <i class="bi bi-clock me-2"></i>
                 <strong>Oferta especial de lançamento:</strong>
@@ -13,13 +13,25 @@
                 <a href="#pricing" class="btn btn-dark btn-sm ms-3 scroll-to-pricing">Aproveitar agora</a>
             </div>
 
-            <!-- Timer e texto para mobile -->
-            <div class="d-md-none">
+            <!-- Mobile View -->
+            <div class="d-md-none text-center w-100">
                 <div class="mb-2">
-                    <i class="bi bi-clock me-1"></i>
-                    <strong>Oferta termina em</strong>
+                    <strong>Oferta especial termina em:</strong>
                 </div>
-                <div id="countdown-mobile" class="countdown-item"></div>
+                <div id="countdown-mobile" class="d-flex justify-content-center gap-2">
+                    <div class="time-box">
+                        <span class="hours">00</span>
+                        <small>horas</small>
+                    </div>
+                    <div class="time-box">
+                        <span class="minutes">00</span>
+                        <small>min</small>
+                    </div>
+                    <div class="time-box">
+                        <span class="seconds">00</span>
+                        <small>seg</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -38,22 +50,28 @@
         border-radius: 4px;
     }
 
-    @media (max-width: 768px) {
-        .alert {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
+    .time-box {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 4px 8px;
+        border-radius: 6px;
+        min-width: 60px;
+        text-align: center;
+    }
 
-        #countdown-mobile {
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-top: 4px;
-        }
+    .time-box span {
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: block;
+    }
+
+    .time-box small {
+        font-size: 0.7rem;
+        opacity: 0.8;
     }
 </style>
 
 <script>
-    function updateCountdown(elementId) {
+    function updateCountdown() {
         const now = new Date();
         const midnight = new Date();
         midnight.setHours(23, 59, 59, 999);
@@ -64,17 +82,18 @@
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+        // Update desktop
         const countdownText = `${hours}h ${minutes}m ${seconds}s`;
-        document.querySelector(`#${elementId}`).textContent = countdownText;
+        document.querySelector('#countdown .countdown-item').textContent = countdownText;
+
+        // Update mobile
+        if (document.querySelector('#countdown-mobile')) {
+            document.querySelector('#countdown-mobile .hours').textContent = hours.toString().padStart(2, '0');
+            document.querySelector('#countdown-mobile .minutes').textContent = minutes.toString().padStart(2, '0');
+            document.querySelector('#countdown-mobile .seconds').textContent = seconds.toString().padStart(2, '0');
+        }
     }
 
-    // Atualizar ambos os contadores (mobile e desktop)
-    setInterval(() => {
-        updateCountdown('countdown');
-        updateCountdown('countdown-mobile');
-    }, 1000);
-
-    // Inicializar os contadores
-    updateCountdown('countdown');
-    updateCountdown('countdown-mobile');
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 </script>

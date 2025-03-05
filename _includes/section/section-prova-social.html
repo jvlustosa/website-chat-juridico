@@ -197,9 +197,27 @@
     }
 
     @media (max-width: 768px) {
+
+        .slider-container::before,
+        .slider-container::after {
+            display: none;
+        }
+
+        .slider-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            padding: 1rem 0;
+        }
+
+        .slide-track {
+            animation: none;
+            gap: 1rem;
+        }
+
         .testimonial-card {
-            flex: 0 0 300px;
-            padding: 1.5rem;
+            scroll-snap-align: start;
+            min-width: 280px;
         }
 
         .section-title {

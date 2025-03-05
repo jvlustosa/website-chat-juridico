@@ -15,8 +15,7 @@ title: Chat Jurídico - Lançamento
     <!-- Logo Section -->
     <div class="container mb-4">
         <div class="text-center">
-            <img src="/assets/vectors/logo-chat-juridico-white.svg" alt="Chat Jurídico Logo" class="img-fluid"
-                style="max-width: 360px;">
+            <img src="/assets/vectors/logo-chat-juridico-white.svg" alt="Chat Jurídico Logo" class="logo-img">
         </div>
 
     </div>
@@ -54,9 +53,9 @@ title: Chat Jurídico - Lançamento
 
                     <!-- Imagens flutuantes -->
                     <img src="/assets/vectors/whatsapp.png" alt="WhatsApp Icon" class="floating-icon floating-1"
-                        style="width: 50px; height: 50px; position: absolute; top: 10%; left: -5%;">
+                        style="width: 50px; height: 50px; position: absolute; top: 10%; left: 0;">
                     <img src="/assets/vectors/whatsapp.png" alt="WhatsApp Icon" class="floating-icon floating-2"
-                        style="width: 50px; height: 50px; position: absolute; top: 20%; right: -5%;">
+                        style="width: 50px; height: 50px; position: absolute; top: 20%; right: 0;">
                     <img src="/assets/vectors/whatsapp.png" alt="WhatsApp Icon" class="floating-icon floating-3"
                         style="width: 50px; height: 50px; position: absolute; bottom: 15%; left: 10%;">
 
@@ -214,13 +213,20 @@ title: Chat Jurídico - Lançamento
 
                         <!-- Elementos de Segurança -->
                         <div class="mt-4">
-                            <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
-                                <i class="bi bi-shield-check text-success fs-4"></i>
-                                <small class="text-muted">Pagamento 100% seguro</small>
-                                <i class="bi bi-lock text-success fs-4"></i>
-                                <small class="text-muted">Dados protegidos</small>
-                                <i class="bi bi-patch-check text-success fs-4"></i>
-                                <small class="text-muted">Garantia de 8 dias</small>
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mb-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-shield-check text-success fs-4"></i>
+                                    <small class="text-muted">Pagamento 100% seguro</small>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-lock text-success fs-4"></i>
+                                    <small class="text-muted">Dados protegidos</small>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-patch-check text-success fs-4"></i>
+                                    <small class="text-muted">Garantia de 8 dias</small>
+                                </div>
                             </div>
                         </div>
 
@@ -591,6 +597,60 @@ title: Chat Jurídico - Lançamento
         .btn-lg {
             padding: 0.75rem 1.25rem;
             font-size: 1rem;
+        }
+
+        .floating-icon {
+            width: 40px !important;
+            height: 40px !important;
+        }
+
+        .floating-1 {
+            left: 5px !important;
+        }
+
+        .floating-2 {
+            right: 5px !important;
+        }
+
+        .floating-3 {
+            left: 5px !important;
+            bottom: 5% !important;
+        }
+
+        .whatsapp-container {
+            width: 90% !important;
+            max-width: 320px !important;
+            transform: translate(-50%, -50%) !important;
+            left: 50% !important;
+            top: 50% !important;
+        }
+
+        .audio-message {
+            font-size: 0.9rem;
+        }
+
+        .profile-pic {
+            width: 30px !important;
+            height: 30px !important;
+            min-width: 30px !important;
+        }
+    }
+
+    .logo-img {
+        width: 100%;
+        height: auto;
+        max-width: 360px;
+    }
+
+    @media (max-width: 768px) {
+        .logo-img {
+            max-width: 240px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .logo-img {
+            max-width: 180px;
         }
     }
 </style>
