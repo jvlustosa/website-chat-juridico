@@ -86,6 +86,26 @@
         overflow: hidden;
     }
 
+    .slider-container::before,
+    .slider-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 150px;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .slider-container::before {
+        left: 0;
+        background: linear-gradient(to right, #f8f9fa 0%, rgba(248, 249, 250, 0) 100%);
+    }
+
+    .slider-container::after {
+        right: 0;
+        background: linear-gradient(to left, #f8f9fa 0%, rgba(248, 249, 250, 0) 100%);
+    }
+
     .slider {
         width: 100%;
         overflow: hidden;
