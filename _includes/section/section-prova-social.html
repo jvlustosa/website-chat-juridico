@@ -1,9 +1,11 @@
 <section class="section section-testimonials">
-    <div class="container">
-        <h2 class="section-title text-center mb-3">Escritórios de alta performance que já usam o Chat
-            Jurídico</h2>
-        <p class="section-subtitle text-center mb-5">Menos tempo gasto, mais contratos fechados, maior qualidade no
-            atendimento</p>
+    <div class="container-fluid px-0">
+        <div class="container">
+            <h2 class="section-title text-center mb-3">Escritórios de alta performance que já usam o Chat
+                Jurídico</h2>
+            <p class="section-subtitle text-center mb-5">Menos tempo gasto, mais contratos fechados, maior qualidade no
+                atendimento</p>
+        </div>
         <div class="slider-container">
             <div class="slider">
                 <div class="slide-track">
@@ -62,7 +64,12 @@
 
 <style>
     .section-testimonials {
-        width: 100%;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         overflow: hidden;
         padding: 5rem 0;
         background-color: #f8f9fa;
@@ -84,6 +91,7 @@
         width: 100%;
         position: relative;
         overflow: hidden;
+        padding: 0;
     }
 
     .slider-container::before,
@@ -197,27 +205,56 @@
     }
 
     @media (max-width: 768px) {
-
-        .slider-container::before,
-        .slider-container::after {
-            display: none;
+        .section-testimonials {
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .slider-container {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-            padding: 1rem 0;
+            padding: 0 1rem;
         }
 
-        .slide-track {
-            animation: none;
-            gap: 1rem;
+        .testimonial-container {
+            flex-direction: column !important;
+            padding: 1rem !important;
         }
 
         .testimonial-card {
+            width: 100% !important;
+            min-width: unset !important;
+            margin: 0.5rem 0 !important;
             scroll-snap-align: start;
-            min-width: 280px;
+        }
+
+        .testimonial-scroll {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            scroll-snap-type: y mandatory;
+            max-height: 80vh;
+            padding: 1rem !important;
+        }
+
+        /* Remove horizontal scroll indicators */
+        .fade-left,
+        .fade-right {
+            display: none !important;
+        }
+
+        /* Add some spacing between cards */
+        .testimonial-card:not(:last-child) {
+            margin-bottom: 1rem !important;
+        }
+
+        /* Adjust padding and margins for better mobile display */
+        .testimonial-card .card-body {
+            padding: 1.25rem !important;
+        }
+
+        .testimonial-section {
+            padding: 2rem 0 !important;
         }
 
         .section-title {
@@ -226,6 +263,36 @@
 
         .section-subtitle {
             font-size: 1rem;
+        }
+
+        .slider-container::before,
+        .slider-container::after {
+            display: none;
+            /* Remove fade effect on mobile */
+        }
+
+        .slide-track {
+            animation: none;
+            /* Remove sliding animation on mobile */
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 1rem;
+        }
+
+        .testimonial-card {
+            flex: none;
+            width: 100%;
+            margin: 0 0 1rem 0;
+        }
+
+        .slider {
+            overflow-y: visible;
+            overflow-x: hidden;
+        }
+
+        .slider-container {
+            overflow: visible;
         }
     }
 </style>

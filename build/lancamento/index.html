@@ -267,11 +267,13 @@
 
 <!-- Social Proof Section -->
 <section class="section section-testimonials">
-    <div class="container">
-        <h2 class="section-title text-center mb-3">Escritórios de alta performance que já usam o Chat
-            Jurídico</h2>
-        <p class="section-subtitle text-center mb-5">Menos tempo gasto, mais contratos fechados, maior qualidade no
-            atendimento</p>
+    <div class="container-fluid px-0">
+        <div class="container">
+            <h2 class="section-title text-center mb-3">Escritórios de alta performance que já usam o Chat
+                Jurídico</h2>
+            <p class="section-subtitle text-center mb-5">Menos tempo gasto, mais contratos fechados, maior qualidade no
+                atendimento</p>
+        </div>
         <div class="slider-container">
             <div class="slider">
                 <div class="slide-track">
@@ -448,7 +450,12 @@
 
 <style>
     .section-testimonials {
-        width: 100%;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         overflow: hidden;
         padding: 5rem 0;
         background-color: #f8f9fa;
@@ -470,6 +477,7 @@
         width: 100%;
         position: relative;
         overflow: hidden;
+        padding: 0;
     }
 
     .slider-container::before,
@@ -583,27 +591,56 @@
     }
 
     @media (max-width: 768px) {
-
-        .slider-container::before,
-        .slider-container::after {
-            display: none;
+        .section-testimonials {
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .slider-container {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-            padding: 1rem 0;
+            padding: 0 1rem;
         }
 
-        .slide-track {
-            animation: none;
-            gap: 1rem;
+        .testimonial-container {
+            flex-direction: column !important;
+            padding: 1rem !important;
         }
 
         .testimonial-card {
+            width: 100% !important;
+            min-width: unset !important;
+            margin: 0.5rem 0 !important;
             scroll-snap-align: start;
-            min-width: 280px;
+        }
+
+        .testimonial-scroll {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            scroll-snap-type: y mandatory;
+            max-height: 80vh;
+            padding: 1rem !important;
+        }
+
+        /* Remove horizontal scroll indicators */
+        .fade-left,
+        .fade-right {
+            display: none !important;
+        }
+
+        /* Add some spacing between cards */
+        .testimonial-card:not(:last-child) {
+            margin-bottom: 1rem !important;
+        }
+
+        /* Adjust padding and margins for better mobile display */
+        .testimonial-card .card-body {
+            padding: 1.25rem !important;
+        }
+
+        .testimonial-section {
+            padding: 2rem 0 !important;
         }
 
         .section-title {
@@ -612,6 +649,36 @@
 
         .section-subtitle {
             font-size: 1rem;
+        }
+
+        .slider-container::before,
+        .slider-container::after {
+            display: none;
+            /* Remove fade effect on mobile */
+        }
+
+        .slide-track {
+            animation: none;
+            /* Remove sliding animation on mobile */
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 1rem;
+        }
+
+        .testimonial-card {
+            flex: none;
+            width: 100%;
+            margin: 0 0 1rem 0;
+        }
+
+        .slider {
+            overflow-y: visible;
+            overflow-x: hidden;
+        }
+
+        .slider-container {
+            overflow: visible;
         }
     }
 </style>
@@ -1335,6 +1402,30 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+
+    @media (max-width: 768px) {
+        .testimonial-rotation {
+            min-height: auto;
+            padding: 1rem;
+        }
+
+        .testimonial-item {
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .testimonial-item .card {
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .testimonial-item .card-body {
+            text-align: left;
+        }
+    }
 </style>
 
 <script>
@@ -1403,38 +1494,60 @@
         
         ];
 
-    const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
-    const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
-    const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
-    let currentIndex = 0;
+    // Only run rotation on desktop
+    if (window.innerWidth > 768) {
+        const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
+        const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
+        const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
+        let currentIndex = 0;
 
-    function updateTestimonial() {
-        // Fade out
-        testimonialText.style.opacity = 0;
-        testimonialAuthor.style.opacity = 0;
-        testimonialPosition.style.opacity = 0;
+        function updateTestimonial() {
+            testimonialText.style.opacity = 0;
+            testimonialAuthor.style.opacity = 0;
+            testimonialPosition.style.opacity = 0;
 
-        setTimeout(() => {
-            // Update content
-            testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
-            testimonialAuthor.textContent = testimonials[currentIndex].name;
-            testimonialPosition.textContent = testimonials[currentIndex].position;
+            setTimeout(() => {
+                testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
+                testimonialAuthor.textContent = testimonials[currentIndex].name;
+                testimonialPosition.textContent = testimonials[currentIndex].position;
 
-            // Fade in
-            testimonialText.style.opacity = 1;
-            testimonialAuthor.style.opacity = 1;
-            testimonialPosition.style.opacity = 1;
+                testimonialText.style.opacity = 1;
+                testimonialAuthor.style.opacity = 1;
+                testimonialPosition.style.opacity = 1;
 
-            // Update index
-            currentIndex = (currentIndex + 1) % testimonials.length;
-        }, 500);
+                currentIndex = (currentIndex + 1) % testimonials.length;
+            }, 500);
+        }
+
+        updateTestimonial();
+        setInterval(updateTestimonial, 10000);
+    } else {
+        // For mobile, show all testimonials stacked
+        const testimonialContainer = document.querySelector('.testimonial-rotation');
+        testimonialContainer.innerHTML = ''; // Clear rotation container
+
+        testimonials.forEach(testimonial => {
+            const testimonialElement = document.createElement('div');
+            testimonialElement.className = 'testimonial-item mb-4';
+            testimonialElement.innerHTML = `
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="mb-2">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                            <p class="mb-2">"${testimonial.text}"</p>
+                            <strong class="d-block">${testimonial.name}</strong>
+                            <small class="text-muted">${testimonial.position}</small>
+                        </div>
+                    </div>
+                `;
+            testimonialContainer.appendChild(testimonialElement);
+        });
     }
-
-    // Initial load
-    updateTestimonial();
-
-    // Update every 10 seconds
-    setInterval(updateTestimonial, 10000);
     });
 </script>
 
