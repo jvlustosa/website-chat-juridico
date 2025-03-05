@@ -31,50 +31,47 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Only run on desktop
-        if (window.innerWidth > 768) {
-            const testimonials = [
-                {% for testimonial in site.data.testimonial %}
-        {
+        const testimonials = [
+            {% for testimonial in site.data.testimonial %}
+            {
             text: "{{ testimonial.text }}",
-                name: "{{ testimonial.name }}",
-                    position: "{{ testimonial.position }}"
+            name: "{{ testimonial.name }}",
+            position: "{{ testimonial.position }}"
         },
         {% endfor %}
-            ];
+        ];
 
-        const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
-        const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
-        const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
-        let currentIndex = 0;
+    const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
+    const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
+    const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
+    let currentIndex = 0;
 
-        function updateTestimonial() {
-            // Fade out
-            testimonialText.style.opacity = 0;
-            testimonialAuthor.style.opacity = 0;
-            testimonialPosition.style.opacity = 0;
+    function updateTestimonial() {
+        // Fade out
+        testimonialText.style.opacity = 0;
+        testimonialAuthor.style.opacity = 0;
+        testimonialPosition.style.opacity = 0;
 
-            setTimeout(() => {
-                // Update content
-                testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
-                testimonialAuthor.textContent = testimonials[currentIndex].name;
-                testimonialPosition.textContent = testimonials[currentIndex].position;
+        setTimeout(() => {
+            // Update content
+            testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
+            testimonialAuthor.textContent = testimonials[currentIndex].name;
+            testimonialPosition.textContent = testimonials[currentIndex].position;
 
-                // Fade in
-                testimonialText.style.opacity = 1;
-                testimonialAuthor.style.opacity = 1;
-                testimonialPosition.style.opacity = 1;
+            // Fade in
+            testimonialText.style.opacity = 1;
+            testimonialAuthor.style.opacity = 1;
+            testimonialPosition.style.opacity = 1;
 
-                // Update index
-                currentIndex = (currentIndex + 1) % testimonials.length;
-            }, 500);
-        }
-
-        // Initial load
-        updateTestimonial();
-
-        // Update every 10 seconds
-        setInterval(updateTestimonial, 10000);
+            // Update index
+            currentIndex = (currentIndex + 1) % testimonials.length;
+        }, 500);
     }
+
+    // Initial load
+    updateTestimonial();
+
+    // Update every 10 seconds
+    setInterval(updateTestimonial, 10000);
     });
 </script>
