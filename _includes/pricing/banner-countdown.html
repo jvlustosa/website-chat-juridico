@@ -1,72 +1,80 @@
 <!-- Sticky Countdown Banner -->
-<div class="countdown-banner sticky-top py-2"
-    style="background-color: #DC3545; border-bottom: 1px solid #B02A37; z-index: 1030;">
+<div class="alert alert-warning alert-dismissible fade show mb-0 text-center py-3" role="alert">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center position-relative">
-            <div class="invisible">
-                <a href="#pricing" class="btn btn-light btn-sm">Aproveitar oferta <i
-                        class="bi bi-arrow-right ms-1"></i></a>
-            </div>
-            <div
-                class="d-flex justify-content-center align-items-center gap-2 position-absolute start-50 translate-middle-x">
-                <i class="bi bi-clock-history text-white"></i>
-                <span class="fw-semibold text-white">Oferta especial termina em:</span>
-                <div class="d-flex gap-2 countdown-timer">
-                    <div class="time-block">
-                        <span id="hours" class="fw-bold">24</span>h
-                    </div>
-                    <div class="time-block">
-                        <span id="minutes" class="fw-bold">00</span>m
-                    </div>
-                    <div class="time-block">
-                        <span id="seconds" class="fw-bold">00</span>s
-                    </div>
+        <div class="row align-items-center justify-content-center">
+            <!-- Timer e texto para desktop -->
+            <div class="d-none d-md-flex align-items-center justify-content-center w-100">
+                <i class="bi bi-clock me-2"></i>
+                <strong>Oferta especial de lançamento:</strong>
+                <span class="mx-2">Termina em</span>
+                <div id="countdown" class="d-flex align-items-center">
+                    <span class="countdown-item"></span>
                 </div>
+                <a href="#pricing" class="btn btn-dark btn-sm ms-3 scroll-to-pricing">Aproveitar agora</a>
             </div>
-            <div>
-                <a href="#pricing" class="btn btn-light btn-sm">Aproveitar oferta <i
-                        class="bi bi-arrow-right ms-1"></i></a>
+
+            <!-- Timer e texto para mobile -->
+            <div class="d-md-none">
+                <div class="mb-2">
+                    <i class="bi bi-clock me-1"></i>
+                    <strong>Oferta termina em</strong>
+                </div>
+                <div id="countdown-mobile" class="countdown-item"></div>
             </div>
         </div>
     </div>
 </div>
 
-
 <style>
-    /* Countdown Banner Styles */
-    .countdown-banner {
-        font-size: 0.9rem;
+    .alert {
+        border: none;
+        background-color: #ffc107;
     }
 
-    .countdown-timer .time-block {
-        background-color: #FFF;
-        padding: 2px 6px;
+    .countdown-item {
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 4px 8px;
         border-radius: 4px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        color: #DC3545;
-        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        .alert {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        #countdown-mobile {
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 4px;
+        }
     }
 </style>
 
 <script>
-    // Countdown Timer Script
-    function updateCountdown() {
+    function updateCountdown(elementId) {
         const now = new Date();
-        const tomorrow = new Date();
-        tomorrow.setHours(23, 59, 59);
+        const midnight = new Date();
+        midnight.setHours(23, 59, 59, 999);
 
-        const diff = tomorrow - now;
+        const diff = midnight - now;
 
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        const countdownText = `${hours}h ${minutes}m ${seconds}s`;
+        document.querySelector(`#${elementId}`).textContent = countdownText;
     }
 
-    // Update countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call
+    // Atualizar ambos os contadores (mobile e desktop)
+    setInterval(() => {
+        updateCountdown('countdown');
+        updateCountdown('countdown-mobile');
+    }, 1000);
+
+    // Inicializar os contadores
+    updateCountdown('countdown');
+    updateCountdown('countdown-mobile');
 </script>
