@@ -450,12 +450,8 @@
 
 <style>
     .section-testimonials {
-        width: 100vw;
+        width: 100%;
         position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
         overflow: hidden;
         padding: 5rem 0;
         background-color: #f8f9fa;
@@ -817,75 +813,72 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Only run on desktop
-        if (window.innerWidth > 768) {
-            const testimonials = [
-                
-        {
+        const testimonials = [
+            
+            {
             text: "O ChatJurídico revolucionou nosso atendimento inicial aos clientes. Reduziu em 70% o tempo gasto com triagem de casos e melhorou significativamente nossa produtividade.",
-                name: "Dr. Ricardo Mendes",
-                    position: "Sócio, Mendes & Associados Advocacia"
+            name: "Dr. Ricardo Mendes",
+            position: "Sócio, Mendes & Associados Advocacia"
         },
         
-        {
+            {
             text: "Excelente ferramenta para automatizar consultas jurídicas básicas. Nossos advogados agora podem focar em questões mais complexas enquanto o ChatJurídico cuida do atendimento inicial.",
-                name: "Dra. Patricia Almeida",
-                    position: "Coordenadora Jurídica, Almeida & Santos"
+            name: "Dra. Patricia Almeida",
+            position: "Coordenadora Jurídica, Almeida & Santos"
         },
         
-        {
+            {
             text: "Implementamos o ChatJurídico há 6 meses e os resultados são surpreendentes. Conseguimos ampliar nossa capacidade de atendimento em 200% sem aumentar nossa equipe.",
-                name: "Dr. Fernando Costa",
-                    position: "Diretor Jurídico, Costa Advogados"
+            name: "Dr. Fernando Costa",
+            position: "Diretor Jurídico, Costa Advogados"
         },
         
-        {
+            {
             text: "O suporte técnico é excepcional e a ferramenta é extremamente intuitiva. Nossos clientes elogiam a rapidez no atendimento, mesmo fora do horário comercial.",
-                name: "Dra. Luciana Martins",
-                    position: "Sócia, LM Advocacia Empresarial"
+            name: "Dra. Luciana Martins",
+            position: "Sócia, LM Advocacia Empresarial"
         },
         
-        {
+            {
             text: "A precisão das respostas e a capacidade de lidar com diferentes áreas do direito nos impressionou. O ChatJurídico se tornou uma ferramenta indispensável para nosso escritório.",
-                name: "Dr. Gabriel Santos",
-                    position: "Coordenador, Santos & Partners"
+            name: "Dr. Gabriel Santos",
+            position: "Coordenador, Santos & Partners"
         },
         
-            ];
+        ];
 
-        const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
-        const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
-        const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
-        let currentIndex = 0;
+    const testimonialText = document.querySelector('.testimonial-rotation .testimonial-text');
+    const testimonialAuthor = document.querySelector('.testimonial-rotation .testimonial-author');
+    const testimonialPosition = document.querySelector('.testimonial-rotation .testimonial-position');
+    let currentIndex = 0;
 
-        function updateTestimonial() {
-            // Fade out
-            testimonialText.style.opacity = 0;
-            testimonialAuthor.style.opacity = 0;
-            testimonialPosition.style.opacity = 0;
+    function updateTestimonial() {
+        // Fade out
+        testimonialText.style.opacity = 0;
+        testimonialAuthor.style.opacity = 0;
+        testimonialPosition.style.opacity = 0;
 
-            setTimeout(() => {
-                // Update content
-                testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
-                testimonialAuthor.textContent = testimonials[currentIndex].name;
-                testimonialPosition.textContent = testimonials[currentIndex].position;
+        setTimeout(() => {
+            // Update content
+            testimonialText.textContent = `"${testimonials[currentIndex].text}"`;
+            testimonialAuthor.textContent = testimonials[currentIndex].name;
+            testimonialPosition.textContent = testimonials[currentIndex].position;
 
-                // Fade in
-                testimonialText.style.opacity = 1;
-                testimonialAuthor.style.opacity = 1;
-                testimonialPosition.style.opacity = 1;
+            // Fade in
+            testimonialText.style.opacity = 1;
+            testimonialAuthor.style.opacity = 1;
+            testimonialPosition.style.opacity = 1;
 
-                // Update index
-                currentIndex = (currentIndex + 1) % testimonials.length;
-            }, 500);
-        }
-
-        // Initial load
-        updateTestimonial();
-
-        // Update every 10 seconds
-        setInterval(updateTestimonial, 10000);
+            // Update index
+            currentIndex = (currentIndex + 1) % testimonials.length;
+        }, 500);
     }
+
+    // Initial load
+    updateTestimonial();
+
+    // Update every 10 seconds
+    setInterval(updateTestimonial, 10000);
     });
 </script>
                         </div>
