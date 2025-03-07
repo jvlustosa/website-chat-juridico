@@ -1656,9 +1656,16 @@
         padding-top: 8px;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         font-size: 0.9rem;
-        color: #1a1a1a;
+        color: #25D366;
+        /* Cor verde do WhatsApp */
+        font-weight: 500;
         font-style: italic;
         text-align: center;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .whatsapp-container {
+        opacity: 0;
         transition: opacity 0.5s ease-in-out;
     }
 
@@ -1693,12 +1700,8 @@
         iconElement.classList.remove('bi-robot');
         iconElement.classList.add('bi-lightning-charge-fill');
 
-        // Mostrar o container após 4 segundos
-        setTimeout(() => {
-            container.classList.add('show-container');
-            // Iniciar a digitação 1 segundo depois que o container aparecer
-            setTimeout(typeText, 1000);
-        }, 3000);
+        // Iniciar a digitação imediatamente
+        typeText();
 
         function typeText() {
             if (index < text.length) {
@@ -1706,12 +1709,18 @@
                 index++;
                 setTimeout(typeText, Math.random() * 50 + 30);
             } else {
-                // Após completar o texto, adicionar classe de fade e mostrar reflexão
+                // Após completar o texto
                 setTimeout(() => {
-                    fadeContent.classList.add('show-fade');
-                    reflectionText.classList.remove('opacity-0');
-                    reflectionText.classList.add('fade-in');
-                }, 1000);
+                    // Mostrar o container
+                    container.classList.add('show-container');
+
+                    // Adicionar fade e mostrar reflexão após 1 segundo
+                    setTimeout(() => {
+                        fadeContent.classList.add('show-fade');
+                        reflectionText.classList.remove('opacity-0');
+                        reflectionText.classList.add('fade-in');
+                    }, 1000);
+                }, 500);
             }
         }
 
