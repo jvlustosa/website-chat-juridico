@@ -1626,14 +1626,37 @@
             text-align: left;
         }
     }
+
+    /* Adicionar efeito de fade out no texto */
+    .fade-content {
+        position: relative;
+        max-height: 100px;
+        /* Ajuste conforme necessário */
+        overflow: hidden;
+    }
+
+    .fade-content::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(transparent, #DCF8C6);
+        pointer-events: none;
+    }
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const container = document.querySelector('.whatsapp-container');
-        const text = "Oi doutor, tudo bem? Então, eu tô ligando porque minha vizinha falou que você ajudou ela com a aposentadoria e eu queria ver se você pode me ajudar também. Eu trabalhei em várias empresas, tenho bastante tempo de carteira assinada, mas nunca consegui entender direito como funciona essa questão da aposentadoria. <span style='color: red; font-weight: bold'>(Áudio continua...)</span>";
+        const text = "Oi doutor, tudo bem? Então, eu tô ligando porque minha vizinha falou que você ajudou ela com a aposentadoria e eu queria ver se você pode me ajudar também. Eu trabalhei em várias empresas, tenho bastante tempo de carteira assinada, mas nunca consegui entender direito como funciona essa questão da aposentadoria.";
         const transcriptionElement = document.getElementById('transcription-text');
         let index = 0;
+
+        // Adicionar div para o efeito de fade
+        transcriptionElement.innerHTML = '<div class="fade-content"></div>';
+        const fadeContent = transcriptionElement.querySelector('.fade-content');
 
         // Atualizar o ícone para spark
         const iconElement = document.querySelector('.transcription-container .bi-robot');
@@ -1649,7 +1672,7 @@
 
         function typeText() {
             if (index < text.length) {
-                transcriptionElement.textContent += text.charAt(index);
+                fadeContent.textContent += text.charAt(index);
                 index++;
                 setTimeout(typeText, Math.random() * 50 + 30);
             }
