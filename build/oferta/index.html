@@ -11,7 +11,7 @@
   <meta name="author" content="Chat Juridico">
 
 
-  <title>Chat Jurídico - Lançamento</title>
+  <title>Chat Jurídico - Oferta Especial de Março</title>
 
 
   <!-- Google tag (gtag.js) -->
@@ -23,18 +23,34 @@
 
   gtag('config', 'G-6Y0W9CS8CE');
 </script>
-
+  <!-- Meta Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1271672773934092');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1271672773934092&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Chat Jurídico - Lançamento">
+  <meta property="og:title" content="Chat Jurídico - Oferta Especial de Março">
   <meta property="og:description"
     content="Automatize o atendimento do seu escritório com nossa plataforma integrada ao WhatsApp">
   <meta property="og:image" content="https://chatjuridico.com.br/assets/vectors/chat-juridico-banner.jpg">
-  <meta property="og:url" content="https://chatjuridico.com.br/lancamento/">
+  <meta property="og:url" content="https://chatjuridico.com.br/oferta/">
   <meta property="og:type" content="website">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Chat Jurídico - Lançamento">
+  <meta name="twitter:title" content="Chat Jurídico - Oferta Especial de Março">
   <meta name="twitter:description"
     content="Automatize o atendimento do seu escritório com nossa plataforma integrada ao WhatsApp">
   <meta name="twitter:image" content="https://chatjuridico.com.br/assets/vectors/chat-juridico-banner.jpg">
@@ -66,17 +82,18 @@
 </a>
 
 <!-- Sticky Countdown Banner -->
-<div class="alert alert-warning alert-dismissible fade show mb-0 text-center py-3" role="alert">
+<div class="alert alert-warning alert-dismissible fade show mb-0 text-center py-3" role="alert" id="countdown-banner">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <!-- Desktop View -->
             <div class="d-none d-md-flex align-items-center justify-content-center w-100">
                 <i class="bi bi-clock me-2"></i>
-                <strong>Oferta especial de lançamento:</strong>
+                <strong>Oferta especial de março:</strong>
                 <span class="mx-2">Termina em</span>
                 <div id="countdown" class="d-flex align-items-center">
                     <span class="countdown-item"></span>
                 </div>
+                <span class="ms-2">(O valor da oferta é única e irá aumentar)</span>
                 <a href="#pricing" class="btn btn-dark btn-sm ms-3 scroll-to-pricing">Aproveitar agora</a>
             </div>
 
@@ -86,6 +103,10 @@
                     <strong>Oferta especial termina em:</strong>
                 </div>
                 <div id="countdown-mobile" class="d-flex justify-content-center gap-2">
+                    <div class="time-box">
+                        <span class="days">00</span>
+                        <small>dias</small>
+                    </div>
                     <div class="time-box">
                         <span class="hours">00</span>
                         <small>horas</small>
@@ -99,6 +120,9 @@
                         <small>seg</small>
                     </div>
                 </div>
+                <div class="mt-2 text-muted small">
+                    (O valor da oferta é única e irá aumentar)
+                </div>
             </div>
         </div>
     </div>
@@ -108,6 +132,36 @@
     .alert {
         border: none;
         background-color: #ffc107;
+        width: 100%;
+        z-index: 1030;
+        transform: translateY(0);
+    }
+
+    .alert.fixed-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .alert.banner-hidden {
+        transform: translateY(-100%);
+    }
+
+    /* Add a sentinel element for intersection observer */
+    .banner-sentinel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+    }
+
+    /* Performance optimizations for animations */
+    .alert {
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
     }
 
     .countdown-item {
@@ -138,23 +192,87 @@
 </style>
 
 <script>
+    const banner = document.getElementById('countdown-banner');
+
+    // Create and insert sentinel
+    const sentinel = document.createElement('div');
+    sentinel.className = 'banner-sentinel';
+    document.body.insertBefore(sentinel, document.body.firstChild);
+
+    // Setup Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                banner.classList.add('fixed-banner');
+            } else {
+                banner.classList.remove('fixed-banner');
+                banner.classList.remove('banner-hidden');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '-1px 0px 0px 0px'
+    });
+
+    // Observe the sentinel
+    observer.observe(sentinel);
+
+    // Handle scroll direction only when banner is fixed
+    let lastScrollY = window.scrollY;
+    let scheduledAnimationFrame = false;
+
+    window.addEventListener('scroll', () => {
+        if (scheduledAnimationFrame) return;
+
+        scheduledAnimationFrame = true;
+        requestAnimationFrame(() => {
+            if (!banner.classList.contains('fixed-banner')) {
+                scheduledAnimationFrame = false;
+                return;
+            }
+
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY) {
+                banner.classList.add('banner-hidden');
+            } else {
+                banner.classList.remove('banner-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+            scheduledAnimationFrame = false;
+        });
+    }, { passive: true });
+
     function updateCountdown() {
         const now = new Date();
-        const midnight = new Date();
-        midnight.setHours(23, 59, 59, 999);
+        const endDate = new Date('2025-03-20T17:00:00');
 
-        const diff = midnight - now;
+        const diff = endDate - now;
 
-        const hours = Math.floor(diff / (1000 * 60 * 60));
+        // If the countdown has ended
+        if (diff < 0) {
+            document.querySelector('#countdown .countdown-item').textContent = 'Oferta encerrada';
+            if (document.querySelector('#countdown-mobile')) {
+                document.querySelector('#countdown-mobile .days').textContent = '00';
+                document.querySelector('#countdown-mobile .hours').textContent = '00';
+                document.querySelector('#countdown-mobile .minutes').textContent = '00';
+                document.querySelector('#countdown-mobile .seconds').textContent = '00';
+            }
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         // Update desktop
-        const countdownText = `${hours}h ${minutes}m ${seconds}s`;
+        const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         document.querySelector('#countdown .countdown-item').textContent = countdownText;
 
         // Update mobile
         if (document.querySelector('#countdown-mobile')) {
+            document.querySelector('#countdown-mobile .days').textContent = days.toString().padStart(2, '0');
             document.querySelector('#countdown-mobile .hours').textContent = hours.toString().padStart(2, '0');
             document.querySelector('#countdown-mobile .minutes').textContent = minutes.toString().padStart(2, '0');
             document.querySelector('#countdown-mobile .seconds').textContent = seconds.toString().padStart(2, '0');
@@ -185,8 +303,9 @@
                     e <span class="gradient-text">venda mais.</span></h1>
                 <p class="lead mb-5">Melhore a gestão do atendimento do seu escritório de advocacia com nossa plataforma
                     integrada ao WhatsApp</p>
-                <a href="#pricing" class="btn btn-light btn-lg mb-3 scroll-to-pricing">Aproveitar oferta de
-                    lançamento <i class="bi bi-arrow-right ms-2"></i></a>
+                <a href="#pricing" class="btn btn-light btn-lg mb-3 scroll-to-pricing">Aproveitar oferta especial de
+                    março
+                    <i class="bi bi-arrow-right ms-2"></i></a>
                 <p class="mt-4 mb-4" style="font-family: 'Caveat', cursive; font-size: 1.2rem; color: #ffffff;">
                     Superpoderes para o seu atendimento</p>
                 <div class="mt-3">
@@ -662,7 +781,7 @@
     <div class="container">
         <!-- Cabeçalho da Seção -->
         <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">Oferta Especial de Lançamento</h2>
+            <h2 class="fw-bold mb-3">Oferta Especial de Março</h2>
             <p class="lead text-muted">Aproveite condições exclusivas por tempo limitado</p>
         </div>
 
@@ -754,7 +873,7 @@
                         <div class="text-center mt-4">
                             <button class="btn btn-primary btn-lg w-100 shining-border"
                                 onclick="window.location.href='https://web.chatjuridico.com.br/checkout'">Aproveitar
-                                oferta de lançamento</button>
+                                oferta especial de março</button>
                         </div>
 
                         <!-- Elementos de Segurança -->
@@ -1042,7 +1161,7 @@
     <!-- Add CTA Button -->
     <div class="text-center mt-5">
         <a href="#pricing" class="btn btn-primary btn-lg scroll-to-pricing">
-            <span class="d-none d-md-inline">Aproveitar oferta especial de lançamento</span>
+            <span class="d-none d-md-inline">Aproveitar oferta especial de março</span>
             <span class="d-md-none">Aproveitar oferta</span>
             <i class="bi bi-arrow-right ms-2"></i>
         </a>
@@ -1083,13 +1202,13 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse2" aria-expanded="false"
                                 aria-controls="collapse2">
-                                Quanto tempo demora para implementar?
+                                O Chat Jurídico faz parte do Cálculo Jurídico?
                             </button>
                         </h2>
                         <div id="collapse2" class="accordion-collapse collapse"
                             aria-labelledby="heading2" data-bs-parent="#accordionFaqLeft">
                             <div class="accordion-body text-muted">
-                                A implementação é instantânea e muito simples. Basta escanear um QR Code com seu WhatsApp e você já pode começar a usar o sistema. Todo o processo leva apenas alguns minutos, utilizando nossa integração via API Web.
+                                Não, apesar de ser idealizado pelos mesmos fundadores, trata-se de um software à parte independente.
                             </div>
                         </div>
                     </div>
@@ -1099,13 +1218,13 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse3" aria-expanded="false"
                                 aria-controls="collapse3">
-                                Preciso mudar meu número do WhatsApp para usar o Chat Jurídico?
+                                Quanto tempo demora para implementar?
                             </button>
                         </h2>
                         <div id="collapse3" class="accordion-collapse collapse"
                             aria-labelledby="heading3" data-bs-parent="#accordionFaqLeft">
                             <div class="accordion-body text-muted">
-                                Não é necessário mudar seu número atual. Nossa solução se integra ao seu WhatsApp normal ou Whatsapp Business que você já utiliza.
+                                A implementação é instantânea e muito simples. Basta escanear um QR Code com seu WhatsApp e você já pode começar a usar o sistema. Todo o processo leva apenas alguns minutos, utilizando nossa integração via API Web.
                             </div>
                         </div>
                     </div>
@@ -1115,13 +1234,13 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse4" aria-expanded="false"
                                 aria-controls="collapse4">
-                                Funciona com WhatsApp normal ou precisa ser Business?
+                                Preciso mudar meu número do WhatsApp para usar o Chat Jurídico?
                             </button>
                         </h2>
                         <div id="collapse4" class="accordion-collapse collapse"
                             aria-labelledby="heading4" data-bs-parent="#accordionFaqLeft">
                             <div class="accordion-body text-muted">
-                                Nossa solução é compatível tanto com o WhatsApp normal quanto com o WhatsApp Business, você pode escolher qual versão utilizar de acordo com sua preferência.
+                                Não é necessário mudar seu número atual. Nossa solução se integra ao seu WhatsApp normal ou Whatsapp Business que você já utiliza.
                             </div>
                         </div>
                     </div>
@@ -1131,13 +1250,13 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse5" aria-expanded="false"
                                 aria-controls="collapse5">
-                                É seguro usar o sistema? Existe risco de bloqueio do WhatsApp?
+                                Funciona com WhatsApp normal ou precisa ser Business?
                             </button>
                         </h2>
                         <div id="collapse5" class="accordion-collapse collapse"
                             aria-labelledby="heading5" data-bs-parent="#accordionFaqLeft">
                             <div class="accordion-body text-muted">
-                                Como em qualquer uso do WhatsApp, existe risco de bloqueio se as políticas de uso não forem seguidas corretamente. Utilizamos a API Web do WhatsApp (não oficial) e recomendamos fortemente que nossos usuários sigam todas as diretrizes do WhatsApp para manter suas contas seguras. Isso inclui evitar envios em massa, respeitar limites de mensagens e manter um padrão de uso natural da plataforma.
+                                Nossa solução é compatível tanto com o WhatsApp normal quanto com o WhatsApp Business, você pode escolher qual versão utilizar de acordo com sua preferência.
                             </div>
                         </div>
                     </div>
@@ -1147,13 +1266,13 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse6" aria-expanded="false"
                                 aria-controls="collapse6">
-                                É possível agendar mensagens?
+                                É seguro usar o sistema? Existe risco de bloqueio do WhatsApp?
                             </button>
                         </h2>
                         <div id="collapse6" class="accordion-collapse collapse"
                             aria-labelledby="heading6" data-bs-parent="#accordionFaqLeft">
                             <div class="accordion-body text-muted">
-                                Sim, oferecemos a funcionalidade de agendamento de mensagens individuais. Você pode programar envios para horários específicos.
+                                Como em qualquer uso do WhatsApp, existe risco de bloqueio se as políticas de uso não forem seguidas corretamente. Utilizamos a API Web do WhatsApp (não oficial) e recomendamos fortemente que nossos usuários sigam todas as diretrizes do WhatsApp para manter suas contas seguras. Isso inclui evitar envios em massa, respeitar limites de mensagens e manter um padrão de uso natural da plataforma.
                             </div>
                         </div>
                     </div>
@@ -1168,14 +1287,14 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse7" aria-expanded="false"
                                 aria-controls="collapse7">
-                                O sistema envia respostas automáticas?
+                                É possível agendar mensagens?
                             </button>
                         </h2>
                         <div id="collapse7" class="accordion-collapse collapse"
                             aria-labelledby="heading7"
                             data-bs-parent="#accordionFaqRight">
                             <div class="accordion-body text-muted">
-                                Não utilizamos respostas automáticas ou bots. Nossa solução é focada em facilitar o atendimento humano, organizando as conversas e permitindo que você gerencie melhor sua comunicação com os clientes.
+                                Sim, oferecemos a funcionalidade de agendamento de mensagens individuais. Você pode programar envios para horários específicos.
                             </div>
                         </div>
                     </div>
@@ -1185,14 +1304,14 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse8" aria-expanded="false"
                                 aria-controls="collapse8">
-                                O sistema funciona com grupos do WhatsApp?
+                                O sistema envia respostas automáticas?
                             </button>
                         </h2>
                         <div id="collapse8" class="accordion-collapse collapse"
                             aria-labelledby="heading8"
                             data-bs-parent="#accordionFaqRight">
                             <div class="accordion-body text-muted">
-                                Não oferecemos suporte para grupos do WhatsApp, apenas para atendimentos individuais.
+                                Não utilizamos respostas automáticas ou bots. Nossa solução é focada em facilitar o atendimento humano, organizando as conversas e permitindo que você gerencie melhor sua comunicação com os clientes.
                             </div>
                         </div>
                     </div>
@@ -1202,14 +1321,14 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse9" aria-expanded="false"
                                 aria-controls="collapse9">
-                                O sistema faz importação de contatos?
+                                O sistema funciona com grupos do WhatsApp?
                             </button>
                         </h2>
                         <div id="collapse9" class="accordion-collapse collapse"
                             aria-labelledby="heading9"
                             data-bs-parent="#accordionFaqRight">
                             <div class="accordion-body text-muted">
-                                Sim, o sistema importa automaticamente seus contatos do WhatsApp no momento em que você conecta seu celular. Isso é feito de forma segura e organizada, facilitando a gestão dos seus contatos desde o primeiro momento de uso.
+                                Não oferecemos suporte para grupos do WhatsApp, apenas para atendimentos individuais.
                             </div>
                         </div>
                     </div>
@@ -1219,14 +1338,14 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse10" aria-expanded="false"
                                 aria-controls="collapse10">
-                                É possível fazer disparos em massa?
+                                O sistema faz importação de contatos?
                             </button>
                         </h2>
                         <div id="collapse10" class="accordion-collapse collapse"
                             aria-labelledby="heading10"
                             data-bs-parent="#accordionFaqRight">
                             <div class="accordion-body text-muted">
-                                Não realizamos disparos em massa para proteger sua conta do WhatsApp e garantir a qualidade do atendimento. Oferecemos apenas a funcionalidade de agendamento de mensagens individuais.
+                                Sim, o sistema importa automaticamente seus contatos do WhatsApp no momento em que você conecta seu celular. Isso é feito de forma segura e organizada, facilitando a gestão dos seus contatos desde o primeiro momento de uso.
                             </div>
                         </div>
                     </div>
@@ -1236,11 +1355,28 @@
                             <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse11" aria-expanded="false"
                                 aria-controls="collapse11">
-                                Qual é a garantia oferecida?
+                                É possível fazer disparos em massa?
                             </button>
                         </h2>
                         <div id="collapse11" class="accordion-collapse collapse"
                             aria-labelledby="heading11"
+                            data-bs-parent="#accordionFaqRight">
+                            <div class="accordion-body text-muted">
+                                Não realizamos disparos em massa para proteger sua conta do WhatsApp e garantir a qualidade do atendimento. Oferecemos apenas a funcionalidade de agendamento de mensagens individuais.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading12">
+                            <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse12" aria-expanded="false"
+                                aria-controls="collapse12">
+                                Qual é a garantia oferecida?
+                            </button>
+                        </h2>
+                        <div id="collapse12" class="accordion-collapse collapse"
+                            aria-labelledby="heading12"
                             data-bs-parent="#accordionFaqRight">
                             <div class="accordion-body text-muted">
                                 Oferecemos garantia de 8 dias para todos os nossos clientes. Se você não estiver satisfeito com o serviço, pode solicitar o reembolso dentro deste período. Para mais detalhes, consulte nossos <a href='/termos-e-condicoes/' class='text-primary'>Termos de Uso</a>.
@@ -1495,9 +1631,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const container = document.querySelector('.whatsapp-container');
-        const text = "Oi doutor, tudo bem? Estou precisando da sua ajuda... Trabalhei 25 anos pagando INSS, sempre certinho, nunca atrasei. Fui dar entrada na aposentadoria mês passado e o INSS negou! 😤 Não entendi nada, porque pelo que todo mundo fala eu já tenho direito. Será que o senhor pode me ajudar a resolver essa situação? 🙏";
+        const text = "Oi doutor, tudo bem? Então, eu tô ligando porque minha vizinha falou que você ajudou ela com a aposentadoria e eu queria ver se você pode me ajudar também. Eu trabalhei em várias empresas, tenho bastante tempo de carteira assinada, mas nunca consegui entender direito como funciona essa questão da aposentadoria. <span style='color: red; font-weight: bold'>(Áudio continua...)</span>";
         const transcriptionElement = document.getElementById('transcription-text');
         let index = 0;
+
+        // Atualizar o ícone para spark
+        const iconElement = document.querySelector('.transcription-container .bi-robot');
+        iconElement.classList.remove('bi-robot');
+        iconElement.classList.add('bi-lightning-charge-fill');
 
         // Mostrar o container após 4 segundos
         setTimeout(() => {
@@ -1532,7 +1673,7 @@
         pelos
         criadores do Calculo Jurídico</p>
     <p class="mb-2">
-        <a href="/termos-e-condicoes/" class="text-muted text-decoration-none">Termos de Uso</a>
+        <a href="/termos-de-uso/" class="text-muted text-decoration-none">Termos de Uso</a>
         <span class="mx-2">|</span>
         <a href="/politica-de-privacidade/" class="text-muted text-decoration-none">Política de Privacidade</a>
     </p>

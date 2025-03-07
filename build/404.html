@@ -23,7 +23,23 @@
 
   gtag('config', 'G-6Y0W9CS8CE');
 </script>
-
+  <!-- Meta Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1271672773934092');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1271672773934092&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Chat Juridico - Plataforma de Atendimento Jurídico">
   <meta property="og:description"
@@ -84,26 +100,66 @@
 
     <!-- Content-->
     <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
+  .error-container {
+    margin: 40px auto;
     max-width: 600px;
     text-align: center;
+    padding: 20px;
   }
-  h1 {
+
+  .error-title {
     margin: 30px 0;
     font-size: 4em;
     line-height: 1;
     letter-spacing: -1px;
+    color: #dc3545;
+  }
+
+  .countdown {
+    font-size: 1.2em;
+    color: #6c757d;
+    margin: 20px 0;
+  }
+
+  .redirect-link {
+    color: #0d6efd;
+    text-decoration: none;
+  }
+
+  .redirect-link:hover {
+    text-decoration: underline;
   }
 </style>
 
-<div class="container">
-  <h1>404</h1>
+<div class="error-container">
+  <h1 class="error-title">404</h1>
+  <p><strong>Página não encontrada</strong></p>
+  <p>A página que você está procurando não existe.</p>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <div class="countdown">
+    Redirecionando em <span id="countdown">10</span> segundos...
+  </div>
+
+  <p>
+    <a href="/oferta" class="redirect-link">Clique aqui</a> para ir direto para nossa oferta especial.
+  </p>
 </div>
 
+<script>
+  // Countdown and redirect
+  let timeLeft = 10;
+  const countdownElement = document.getElementById('countdown');
+
+  const countdown = setInterval(() => {
+    timeLeft--;
+    countdownElement.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      window.location.href = '/oferta';
+    }
+  }, 1000);
+</script>
 
 </body>
 
@@ -113,7 +169,7 @@
         pelos
         criadores do Calculo Jurídico</p>
     <p class="mb-2">
-        <a href="/termos-e-condicoes/" class="text-muted text-decoration-none">Termos de Uso</a>
+        <a href="/termos-de-uso/" class="text-muted text-decoration-none">Termos de Uso</a>
         <span class="mx-2">|</span>
         <a href="/politica-de-privacidade/" class="text-muted text-decoration-none">Política de Privacidade</a>
     </p>

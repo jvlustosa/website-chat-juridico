@@ -1,6 +1,9 @@
 - question: "Como funciona o Chat Jurídico na prática?"
   answer: "O Chat Jurídico é uma solução profissional que se integra ao seu WhatsApp para otimizar o atendimento ao cliente. Diferente de bots automáticos, nosso sistema preserva o atendimento humano e personalizado, organizando e facilitando a gestão das conversas."
 
+- question: "O Chat Jurídico faz parte do Cálculo Jurídico?"
+  answer: "Não, apesar de ser idealizado pelos mesmos fundadores, trata-se de um software à parte independente."
+
 - question: "Quanto tempo demora para implementar?"
   answer: "A implementação é instantânea e muito simples. Basta escanear um QR Code com seu WhatsApp e você já pode começar a usar o sistema. Todo o processo leva apenas alguns minutos, utilizando nossa integração via API Web."
 
@@ -30,3 +33,4 @@
 
 - question: "Qual é a garantia oferecida?"
   answer: "Oferecemos garantia de 8 dias para todos os nossos clientes. Se você não estiver satisfeito com o serviço, pode solicitar o reembolso dentro deste período. Para mais detalhes, consulte nossos <a href='/termos-e-condicoes/' class='text-primary'>Termos de Uso</a>."
+

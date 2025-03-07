@@ -1,15 +1,16 @@
 <!-- Sticky Countdown Banner -->
-<div class="alert alert-warning alert-dismissible fade show mb-0 text-center py-3" role="alert">
+<div class="alert alert-warning alert-dismissible fade show mb-0 text-center py-3" role="alert" id="countdown-banner">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <!-- Desktop View -->
             <div class="d-none d-md-flex align-items-center justify-content-center w-100">
                 <i class="bi bi-clock me-2"></i>
-                <strong>Oferta especial de lançamento:</strong>
+                <strong>Oferta especial de março:</strong>
                 <span class="mx-2">Termina em</span>
                 <div id="countdown" class="d-flex align-items-center">
                     <span class="countdown-item"></span>
                 </div>
+                <span class="ms-2">(O valor da oferta é única e irá aumentar)</span>
                 <a href="#pricing" class="btn btn-dark btn-sm ms-3 scroll-to-pricing">Aproveitar agora</a>
             </div>
 
@@ -19,6 +20,10 @@
                     <strong>Oferta especial termina em:</strong>
                 </div>
                 <div id="countdown-mobile" class="d-flex justify-content-center gap-2">
+                    <div class="time-box">
+                        <span class="days">00</span>
+                        <small>dias</small>
+                    </div>
                     <div class="time-box">
                         <span class="hours">00</span>
                         <small>horas</small>
@@ -32,6 +37,9 @@
                         <small>seg</small>
                     </div>
                 </div>
+                <div class="mt-2 text-muted small">
+                    (O valor da oferta é única e irá aumentar)
+                </div>
             </div>
         </div>
     </div>
@@ -41,6 +49,36 @@
     .alert {
         border: none;
         background-color: #ffc107;
+        width: 100%;
+        z-index: 1030;
+        transform: translateY(0);
+    }
+
+    .alert.fixed-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .alert.banner-hidden {
+        transform: translateY(-100%);
+    }
+
+    /* Add a sentinel element for intersection observer */
+    .banner-sentinel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+    }
+
+    /* Performance optimizations for animations */
+    .alert {
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
     }
 
     .countdown-item {
@@ -71,23 +109,87 @@
 </style>
 
 <script>
+    const banner = document.getElementById('countdown-banner');
+
+    // Create and insert sentinel
+    const sentinel = document.createElement('div');
+    sentinel.className = 'banner-sentinel';
+    document.body.insertBefore(sentinel, document.body.firstChild);
+
+    // Setup Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                banner.classList.add('fixed-banner');
+            } else {
+                banner.classList.remove('fixed-banner');
+                banner.classList.remove('banner-hidden');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '-1px 0px 0px 0px'
+    });
+
+    // Observe the sentinel
+    observer.observe(sentinel);
+
+    // Handle scroll direction only when banner is fixed
+    let lastScrollY = window.scrollY;
+    let scheduledAnimationFrame = false;
+
+    window.addEventListener('scroll', () => {
+        if (scheduledAnimationFrame) return;
+
+        scheduledAnimationFrame = true;
+        requestAnimationFrame(() => {
+            if (!banner.classList.contains('fixed-banner')) {
+                scheduledAnimationFrame = false;
+                return;
+            }
+
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY) {
+                banner.classList.add('banner-hidden');
+            } else {
+                banner.classList.remove('banner-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+            scheduledAnimationFrame = false;
+        });
+    }, { passive: true });
+
     function updateCountdown() {
         const now = new Date();
-        const midnight = new Date();
-        midnight.setHours(23, 59, 59, 999);
+        const endDate = new Date('2025-03-20T17:00:00');
 
-        const diff = midnight - now;
+        const diff = endDate - now;
 
-        const hours = Math.floor(diff / (1000 * 60 * 60));
+        // If the countdown has ended
+        if (diff < 0) {
+            document.querySelector('#countdown .countdown-item').textContent = 'Oferta encerrada';
+            if (document.querySelector('#countdown-mobile')) {
+                document.querySelector('#countdown-mobile .days').textContent = '00';
+                document.querySelector('#countdown-mobile .hours').textContent = '00';
+                document.querySelector('#countdown-mobile .minutes').textContent = '00';
+                document.querySelector('#countdown-mobile .seconds').textContent = '00';
+            }
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         // Update desktop
-        const countdownText = `${hours}h ${minutes}m ${seconds}s`;
+        const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         document.querySelector('#countdown .countdown-item').textContent = countdownText;
 
         // Update mobile
         if (document.querySelector('#countdown-mobile')) {
+            document.querySelector('#countdown-mobile .days').textContent = days.toString().padStart(2, '0');
             document.querySelector('#countdown-mobile .hours').textContent = hours.toString().padStart(2, '0');
             document.querySelector('#countdown-mobile .minutes').textContent = minutes.toString().padStart(2, '0');
             document.querySelector('#countdown-mobile .seconds').textContent = seconds.toString().padStart(2, '0');

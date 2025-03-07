@@ -1,7 +1,7 @@
 ---
 layout: lp
-permalink: /lancamento/
-title: Chat Jurídico - Lançamento
+permalink: /oferta/
+title: Chat Jurídico - Oferta Especial de Março
 ---
 {% include main/whatsapp-widget.html %}
 
@@ -27,8 +27,9 @@ title: Chat Jurídico - Lançamento
                     e <span class="gradient-text">venda mais.</span></h1>
                 <p class="lead mb-5">Melhore a gestão do atendimento do seu escritório de advocacia com nossa plataforma
                     integrada ao WhatsApp</p>
-                <a href="#pricing" class="btn btn-light btn-lg mb-3 scroll-to-pricing">Aproveitar oferta de
-                    lançamento <i class="bi bi-arrow-right ms-2"></i></a>
+                <a href="#pricing" class="btn btn-light btn-lg mb-3 scroll-to-pricing">Aproveitar oferta especial de
+                    março
+                    <i class="bi bi-arrow-right ms-2"></i></a>
                 <p class="mt-4 mb-4" style="font-family: 'Caveat', cursive; font-size: 1.2rem; color: #ffffff;">
                     Superpoderes para o seu atendimento</p>
                 <div class="mt-3">
@@ -117,7 +118,7 @@ title: Chat Jurídico - Lançamento
     <div class="container">
         <!-- Cabeçalho da Seção -->
         <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">Oferta Especial de Lançamento</h2>
+            <h2 class="fw-bold mb-3">Oferta Especial de Março</h2>
             <p class="lead text-muted">Aproveite condições exclusivas por tempo limitado</p>
         </div>
 
@@ -209,7 +210,7 @@ title: Chat Jurídico - Lançamento
                         <div class="text-center mt-4">
                             <button class="btn btn-primary btn-lg w-100 shining-border"
                                 onclick="window.location.href='https://web.chatjuridico.com.br/checkout'">Aproveitar
-                                oferta de lançamento</button>
+                                oferta especial de março</button>
                         </div>
 
                         <!-- Elementos de Segurança -->
@@ -397,7 +398,7 @@ title: Chat Jurídico - Lançamento
     <!-- Add CTA Button -->
     <div class="text-center mt-5">
         <a href="#pricing" class="btn btn-primary btn-lg scroll-to-pricing">
-            <span class="d-none d-md-inline">Aproveitar oferta especial de lançamento</span>
+            <span class="d-none d-md-inline">Aproveitar oferta especial de março</span>
             <span class="d-md-none">Aproveitar oferta</span>
             <i class="bi bi-arrow-right ms-2"></i>
         </a>
@@ -702,9 +703,14 @@ title: Chat Jurídico - Lançamento
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const container = document.querySelector('.whatsapp-container');
-        const text = "Oi doutor, tudo bem? Estou precisando da sua ajuda... Trabalhei 25 anos pagando INSS, sempre certinho, nunca atrasei. Fui dar entrada na aposentadoria mês passado e o INSS negou! 😤 Não entendi nada, porque pelo que todo mundo fala eu já tenho direito. Será que o senhor pode me ajudar a resolver essa situação? 🙏";
+        const text = "Oi doutor, tudo bem? Então, eu tô ligando porque minha vizinha falou que você ajudou ela com a aposentadoria e eu queria ver se você pode me ajudar também. Eu trabalhei em várias empresas, tenho bastante tempo de carteira assinada, mas nunca consegui entender direito como funciona essa questão da aposentadoria. <span style='color: red; font-weight: bold'>(Áudio continua...)</span>";
         const transcriptionElement = document.getElementById('transcription-text');
         let index = 0;
+
+        // Atualizar o ícone para spark
+        const iconElement = document.querySelector('.transcription-container .bi-robot');
+        iconElement.classList.remove('bi-robot');
+        iconElement.classList.add('bi-lightning-charge-fill');
 
         // Mostrar o container após 4 segundos
         setTimeout(() => {
