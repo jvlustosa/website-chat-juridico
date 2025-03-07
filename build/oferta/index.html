@@ -1627,11 +1627,10 @@
         }
     }
 
-    /* Adicionar efeito de fade out no texto */
+    /* Estilos para o fade content */
     .fade-content {
         position: relative;
         max-height: 100px;
-        /* Ajuste conforme necessário */
         overflow: hidden;
     }
 
@@ -1643,7 +1642,32 @@
         right: 0;
         height: 40px;
         background: linear-gradient(transparent, #DCF8C6);
-        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .fade-content.show-fade::after {
+        opacity: 1;
+    }
+
+    /* Estilos para o texto de reflexão */
+    .reflection-text {
+        margin-top: 12px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+        color: #1a1a1a;
+        font-style: italic;
+        text-align: center;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .opacity-0 {
+        opacity: 0;
+    }
+
+    .fade-in {
+        opacity: 1;
     }
 </style>
 
@@ -1654,9 +1678,15 @@
         const transcriptionElement = document.getElementById('transcription-text');
         let index = 0;
 
-        // Adicionar div para o efeito de fade
-        transcriptionElement.innerHTML = '<div class="fade-content"></div>';
+        // Criar estrutura do conteúdo
+        transcriptionElement.innerHTML = `
+            <div class="fade-content"></div>
+            <div class="reflection-text opacity-0">
+                Quanto tempo ouvindo áudio poderia ser aproveitado ajudando efetivamente seus clientes?
+            </div>
+        `;
         const fadeContent = transcriptionElement.querySelector('.fade-content');
+        const reflectionText = transcriptionElement.querySelector('.reflection-text');
 
         // Atualizar o ícone para spark
         const iconElement = document.querySelector('.transcription-container .bi-robot');
@@ -1675,6 +1705,13 @@
                 fadeContent.textContent += text.charAt(index);
                 index++;
                 setTimeout(typeText, Math.random() * 50 + 30);
+            } else {
+                // Após completar o texto, adicionar classe de fade e mostrar reflexão
+                setTimeout(() => {
+                    fadeContent.classList.add('show-fade');
+                    reflectionText.classList.remove('opacity-0');
+                    reflectionText.classList.add('fade-in');
+                }, 1000);
             }
         }
 
