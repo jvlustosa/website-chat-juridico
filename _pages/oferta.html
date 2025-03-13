@@ -209,7 +209,7 @@ title: Chat Jurídico - Oferta Especial de Março
                         <!-- Botão de Ação -->
                         <div class="text-center mt-4">
                             <button class="btn btn-primary btn-lg w-100 shining-border"
-                                onclick="redirectToCheckout()">Aproveitar
+                                onclick="window.location.href='{% if site.time < '2025-03-15' %}https://web.chatjuridico.com.br/version-test/checkout{% else %}https://web.chatjuridico.com.br/checkout{% endif %}'">Aproveitar
                                 oferta especial de março</button>
                         </div>
 
@@ -701,18 +701,6 @@ title: Chat Jurídico - Oferta Especial de Março
 </style>
 
 <script>
-    // Define redirectToCheckout as a global function
-    function redirectToCheckout() {
-        const targetDate = new Date('2025-03-15');
-        const currentDate = new Date();
-
-        if (currentDate < targetDate) {
-            window.location.href = 'https://web.chatjuridico.com.br/version-test/checkout';
-        } else {
-            window.location.href = 'https://web.chatjuridico.com.br/checkout';
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
         const container = document.querySelector('.whatsapp-container');
         const text = "Oi doutor, tudo bem? Então, eu tô ligando porque minha vizinha falou que você ajudou ela com a aposentadoria e eu queria ver se você pode me ajudar também. Eu trabalhei em várias empresas, tenho bastante tempo de carteira assinada, mas nunca consegui entender direito como funciona essa questão da aposentadoria...";
